@@ -1,8 +1,14 @@
 from django.shortcuts import render
-
-# Create your views here.
 from django.http import HttpResponse
+from django.contrib.auth import login
 
 
 def home(request):
-    return HttpResponse("Hello, world. You're at the Seat Selector Home Page.")
+    return HttpResponse("login or signup")
+
+def signup(request):
+    return HttpResponse("sign up")
+
+def index(request):
+    return HttpResponse("What user sees once they sign in successfully")
+
