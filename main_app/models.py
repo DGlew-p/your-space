@@ -19,6 +19,7 @@ class Profile(models.Model):
     bio = models.CharField(max_length=100)
     role = models.TextField(max_length=250)
     timeSlot = models.ManyToManyField(TimeSlot)
+    buddy = models.ManyToManyField(User)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 def __str__(self):
