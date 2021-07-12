@@ -7,8 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>BACK 2 WORK</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
+  {% block content %}
   <header>
     <nav>
       <div>
@@ -17,11 +20,10 @@
     </nav>
   </header>
   <main class="container">
-    {% block content %}
-    {% endblock %}
   </main>
   <footer class="page-footer">
     <div class="right">All Rights Reserved, &copy; 2021 Seat Tracker &nbsp;</div>
   </footer>
+  {% endblock %}
 </body>
 </html>
