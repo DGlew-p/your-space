@@ -2,6 +2,13 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+<<<<<<< Updated upstream
+=======
+from .models import TimeSlot, Profile, Photo
+from django.contrib.auth.models import User
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView
+>>>>>>> Stashed changes
 import uuid
 import boto3
 
@@ -28,7 +35,15 @@ def signup(request):
     return render(request, 'registration/signup.html', context)
 
 def index(request):
+<<<<<<< Updated upstream
     return render(request, 'index.html')
+=======
+    userList = User.objects.values()
+    # displays all usernames including for user currently signed in
+    print(userList)
+    print(request.user)
+    return render(request, 'index.html', {'userList': userList})
+>>>>>>> Stashed changes
 
 
 def add_photo(request, profile_id):
