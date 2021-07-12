@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 
 def home(request):
-    return HttpResponse("Hello, world. You're at the Seat Selector Home Page.")
+    return render(request, 'home.html')
 
 
 def signup(request):
@@ -23,4 +23,4 @@ def signup(request):
     return render(request, 'registration/signup.html', context)
 
 def index(request):
-    HttpResponse("this is what authenticated users should see")
+    return render(request, 'index.html')
