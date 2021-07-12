@@ -17,7 +17,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='TimeSlot',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('date', models.DateField()),
                 ('slot', models.CharField(max_length=50)),
             ],
@@ -25,20 +26,24 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Profile',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=100)),
                 ('bio', models.CharField(max_length=100)),
                 ('role', models.TextField(max_length=250)),
                 ('timeSlot', models.ManyToManyField(to='main_app.TimeSlot')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('user', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(
             name='Photo',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('url', models.CharField(max_length=200)),
-                ('Profile', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='main_app.profile')),
+                ('Profile', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='main_app.profile')),
             ],
         ),
     ]
