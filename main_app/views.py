@@ -23,4 +23,4 @@ def signup(request):
     return render(request, 'registration/signup.html', context)
 
 def index(request):
-    HttpResponse("this is what we should see after successfully signing in")
+    HttpResponse("this is what authenticated users should see")
