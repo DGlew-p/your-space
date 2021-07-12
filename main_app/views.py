@@ -21,3 +21,6 @@ def signup(request):
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
+
+def index(request):
+    HttpResponse("this is what we should see after successfully signing in")
