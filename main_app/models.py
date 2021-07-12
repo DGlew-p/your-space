@@ -33,7 +33,7 @@ def get_absolute_url(self):
 
 class Photo(models.Model):
     url = models.CharField(max_length=200)
-    Profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"Photo for profile_id: {self.profile_id} @{self.url}"
