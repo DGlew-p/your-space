@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BACK 2 WORK</title>
+</head>
+<body>
+    <a href="">Add Timeslot</a>
+    <h2>Hi! Welcome to the app, <span style="color: red;">{{ request.user }}</span>! </h2>
+    {% for item in userList %}
+       
+        <p> {{ item.username }} </p>
+        <button>add</button>
+        
+    {% endfor %}
+
+</body>
+</html>
