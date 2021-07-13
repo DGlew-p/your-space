@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     # 'main_app',
+    'widget_tweaks',
     'main_app.apps.MainAppConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -81,7 +82,7 @@ DATABASES = {
         'NAME': 'seat_tracker',
         'USERNAME': 'dglew',
         'PASSWORD': '2501',
-       
+
     }
 }
 
