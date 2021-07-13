@@ -22,13 +22,11 @@ class Profile(models.Model):
     buddy = models.ManyToManyField(User, related_name='buddy', blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.user
 
-def __str__(self):
-    return self.user
-
-
-def get_absolute_url(self):
-    return reverse('detail', kwargs={'profile_id': self.id})
+    def get_absolute_url(self):
+        return reverse('detail', kwargs={'profile_id': self.id})
 
 
 class Photo(models.Model):

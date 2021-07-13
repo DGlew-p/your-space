@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Profile Details</h1>
+
+<div>
+        <span class="card-title">{{ profile.name }}</span>
+        <p>Bio: {{ profile.bio }}</p>
+        <p>Role: {{ profile.role }}</p>
+       
+      </div>
+      <div class="card-action">
+        <a href="{% url 'profile_update' profile.id %}">Edit</a>
+        <a href="{% url 'profile_delete' profile.id %}">Delete</a>
+      </div>
+
+</div>
+
+{% endblock %}
