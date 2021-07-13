@@ -1,15 +1,54 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'base.html' %} {% block content %}
+<div class="home-frame">
+	<div class="home-grid">
+		<div class="item-a box-relative flex-home-buttons">
+			<h1 class="item-d">/sw&emacr;t/</h1>
+			<img {% load static %}src="{% static "images/bg.png" %}" alt="">
+		</div>
+		<div class="flex-login item-b">
+			<form method="post" action="{% url 'login' %}">
+				{% csrf_token %} 
+        {% comment %} {% load widget_tweaks %} {% endcomment %}
+        {% comment %} <div class="field">
+					<p class="control has-icons-left">
+          {% render_field form.username class+="input is-rounded is-medium signup" placeholder="Username"%}
+            <span class="icon is-small is-left"><i class="fas fa-user"></i></span>
+					</p>
+        </div>
+         <div class="field">
+					<p class="control has-icons-left">
+          {% render_field form.password1 class+="input is-rounded is-medium signup" placeholder="Password"%}
+            <span class="icon is-small is-left"><i class="fas fa-unlock"></i></span>
+					</p>
+        </div> {% endcomment %}
+        {{ form.as_p }}
+				<input type="submit" class="btn" value="login" />
+				<input type="hidden" name="next" value="{{ next }}" />
+			</form>
+			<h3>Don't have an account?</h3>
+			<a href="{% url 'signup' %}">Sign up here.</a><br />
+		</div>
+	</div>
+</div>
 
-<h1>Log In</h1>
-
-<form method="post" action="{% url 'login' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <input type="submit" class="btn" value="login">
-  <input type="hidden" name="next" value="{{ next }}">
-</form>
-
-<h3>Don't have an account?</h3><a href="{% url 'signup' %}">Sign up here.</a><br>
-
-{% endblock %}
+{% endblock %} {% comment %}
+<div class="field">
+	<p class="control has-icons-left has-icons-right">
+		<input class="input" type="email" placeholder="Email" />
+		<span class="icon is-small is-left">
+			<i class="fas fa-envelope"></i>
+		</span>
+		<span class="icon is-small is-right">
+			<i class="fas fa-check"></i>
+		</span>
+	</p>
+</div>
+<div class="field">
+	<p class="control has-icons-left">
+		<input class="input" type="password" placeholder="Password" />
+		<span class="icon is-small is-left">
+			<i class="fas fa-lock"></i>
+		</span>
+	</p>
+</div>
+{% endcomment %}

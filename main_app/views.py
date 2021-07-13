@@ -12,6 +12,9 @@ import boto3
 S3_BASE_URL = 'https://s3.us-east-2.amazonaws.com/'
 BUCKET = 'silverwareseatselector'
 
+from .forms import CreateUserForm
+
+
 def home(request):
     return render(request, 'home.html')
 
@@ -19,16 +22,17 @@ def home(request):
 def signup(request):
     error_message = ''
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CreateUserForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
             return redirect('index')
         else:
             error_message = 'Invalid sign up - try again'
-    form = UserCreationForm()
+    form = CreateUserForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
+
 
 def index(request):
     userList = User.objects.values()
@@ -36,6 +40,7 @@ def index(request):
     print(userList)
     print(request.user)
     return render(request, 'index.html', {'userList': userList})
+
 
 
 def add_photo(request, profile_id):
@@ -50,6 +55,7 @@ def add_photo(request, profile_id):
       photo.save()
     except:
       print('An error occurred uploading file to S3')
+
 
 
 class ProfileCreate(CreateView):
@@ -70,3 +76,5 @@ class ProfileDelete(DeleteView):
 def profile_detail(request, profile_id):
   profile = Profile.objects.get(id=profile_id)
   return render(request, 'profile/detail.html', {'profile': profile })
+
+
