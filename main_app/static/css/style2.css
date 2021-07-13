@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora&family=Roboto&display=swap');
 
 .home-frame {
 	padding: 2rem;
@@ -35,6 +35,7 @@
 	left: 20%;
 	font-size: 3rem;
 	margin-bottom: 1rem;
+	font-family: 'Lora', serif;
 }
 
 .box-relative {
@@ -47,17 +48,19 @@
 	padding: 1.5rem;
 	font-size: 1.2vw;
 	margin-bottom: 1rem;
+	font-family: 'Roboto', sans-serif;
 }
 
 .button.login {
 	border: 2px #ffee53 solid;
 	width: 32%;
+	font-family: 'Roboto', sans-serif;
 }
 
 @media (max-width: 575.98px) {
 	.home-grid {
 		grid-template-columns: 1fr;
-		grid-template-rows: 40vh 60vh;
+		grid-template-rows: 30vh 40vh;
 	}
 
 	.item-a {
