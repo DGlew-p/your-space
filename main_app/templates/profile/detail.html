@@ -4,10 +4,25 @@
 <h1>Profile Details</h1>
 
 <div>
+  {% for photo in profile.photo_set.all %}
+  <img src="{{photo.url}}">
+  {% empty %}
+  <div>No Photos Uploaded</div>
+  {% endfor %}
+</div>
+
+<form action="{% url 'add_photo' profile.id %}" enctype="multipart/form-data" method="POST">
+  {% csrf_token %}
+  <input type="file" name="photo-file">
+  <br><br>
+  <input type="submit" class="btn" value="Upload Photo">
+</form>
+
+<div>
         <span class="card-title">{{ profile.name }}</span>
         <p>Bio: {{ profile.bio }}</p>
         <p>Role: {{ profile.role }}</p>
-       
+
       </div>
       <div class="card-action">
         <a href="{% url 'profile_update' profile.id %}">Edit</a>
