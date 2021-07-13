@@ -63,9 +63,7 @@
 	font-family: 'Roboto', sans-serif;
 }
 
-/* .input.signup {
-	max-width: 70%;
-} */
+
 @media (max-width: 575.98px) {
 	.home-grid {
 		grid-template-columns: 1fr;
