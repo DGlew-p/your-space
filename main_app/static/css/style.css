@@ -1,6 +1,27 @@
-@import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
 
 h1.firstTitle {
 	font-family: 'Lora', serif;
 	font-size: 2.5rem;
+	text-align: center;
 }
+
+.button.is-large.home {
+	background: #ffee53;
+}
+
+.columns.is-vcentered.home-page {
+	align-items: center;
+	height: 100vh;
+}
+
+.is-align-items-center {
+	align-items: center !important;
+	position: relative;
+}
+
+text-absolute {
+	position: absolute;
+	top: 33%;
+	right: 70%;
+} */

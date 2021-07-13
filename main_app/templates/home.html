@@ -1,8 +1,31 @@
-{% extends 'base.html' %}{% block content %}
-<div>
-	<h1 class="firstTitle">sw&emacr;t</h1>
-	<br />
-	<a href="{% url 'signup' %}">CREATE AN ACCOUNT</a><br />
-	<a href="{% url 'login' %}">LOGIN</a><br />
+{% extends 'base.html' %} {% block content %}
+<div class="home-frame">
+	<div class="home-grid">
+		<div class="item-a box-relative flex-home-buttons">
+			<h1 class="item-d">/sw&emacr;t/</h1>
+			<img {% load static %}src="{% static "images/bg.png" %}" alt="">
+		</div>
+		<div class="flex-home-buttons item-b">
+			<a class="button create" href="{% url 'signup' %}">CREATE AN ACCOUNT</a>
+			<a class="button login" href="{% url 'login' %}">LOGIN</a>
+		</div>
+	</div>
 </div>
-{% endblock %}
+{% endblock %} {% comment %}
+<div class="container is-fluid">
+	<div class="columns is-vcentered home-page">
+		<div class="column is-align-items-center">
+			<div class="text-absolute">
+				<h1 class="firstTitle">/sw&emacr;t/</h1>
+			</div>
+			<img {% load static %}src="{% static "images/bg.png" %}" alt="">
+		</div>
+		<div class="column home-but">
+			<a class="button is-large home" href="{% url 'signup' %}"
+				>CREATE AN ACCOUNT</a
+			>
+			<a class="button is-rounded" href="{% url 'login' %}">LOGIN</a>
+		</div>
+	</div>
+</div>
+{% endcomment %}
