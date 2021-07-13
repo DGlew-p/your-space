@@ -11,7 +11,7 @@ class TimeSlot(models.Model):
     slot = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.date
+        return str(self.date) 
 
 
 class Profile(models.Model):
