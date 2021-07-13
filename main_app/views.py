@@ -1,3 +1,4 @@
+from .forms import CreateUserForm
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
@@ -11,8 +12,6 @@ import boto3
 
 S3_BASE_URL = 'https://s3.us-east-2.amazonaws.com/'
 BUCKET = 'silverwareseatselector'
-
-from .forms import CreateUserForm
 
 
 def home(request):
@@ -37,10 +36,13 @@ def signup(request):
 def index(request):
     userList = User.objects.values()
     # displays all usernames including for user currently signed in
+    timeslot = TimeSlot.objects.values()
     print(userList)
     print(request.user)
-    return render(request, 'index.html', {'userList': userList})
-
+    return render(request, 'index.html', {
+      'userList': userList,
+      'timeslot': timeslot
+      })
 
 
 def add_photo(request, profile_id):
@@ -60,22 +62,28 @@ def add_photo(request, profile_id):
 
 
 class ProfileCreate(CreateView):
-  model = Profile
-  fields = ['name', 'bio', 'role']
-  def form_valid(self, form):
+    model = Profile
+    fields = ['name', 'bio', 'role']
+
+    def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
+
 class ProfileUpdate(UpdateView):
-  model = Profile
-  fields = ['name', 'bio', 'role']
+    model = Profile
+    fields = ['name', 'bio', 'role']
+
 
 class ProfileDelete(DeleteView):
-  model = Profile
-  success_url = '/'
+    model = Profile
+    success_url = '/'
+
 
 def profile_detail(request, profile_id):
-  profile = Profile.objects.get(id=profile_id)
-  return render(request, 'profile/detail.html', {'profile': profile })
+    profile = Profile.objects.get(id=profile_id)
+    return render(request, 'profile/detail.html', {'profile': profile})
 
 
+class TimeSlotDetail(DetailView):
+    model = TimeSlot
