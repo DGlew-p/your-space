@@ -6,6 +6,12 @@ from .models import TimeSlot, Profile, Photo
 from django.contrib.auth.models import User
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
+import uuid
+import boto3
+
+
+S3_BASE_URL = 'https://s3.us-east-2.amazonaws.com/'
+BUCKET = 'silverwareseatselector'
 
 from .forms import CreateUserForm
 
@@ -35,3 +41,20 @@ def index(request):
     print(userList)
     print(request.user)
     return render(request, 'index.html', {'userList': userList})
+
+
+
+def add_photo(request, profile_id):
+  photo_file = request.FILES.get('photo-file', None)
+  if photo_file:
+    s3 = boto3.client('s3')
+    key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+    try:
+      s3.upload_fileobj(photo_file, BUCKET, key)
+      url = f"{S3_BASE_URL}{BUCKET}/{key}"
+      photo = Photo(url=url, profile_id=profile_id)
+      photo.save()
+    except:
+      print('An error occurred uploading file to S3')
+    return render(request, 'index.html', {'userList': userList})
+

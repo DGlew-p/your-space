@@ -4,7 +4,7 @@ from django.contrib import admin
 from .models import TimeSlot
 from .models import Profile
 from .models import Photo
-from .models import User
+
 
 
 admin.site.register(TimeSlot)
