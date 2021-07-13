@@ -1,3 +1,4 @@
+from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
@@ -14,6 +15,10 @@ BUCKET = 'silverwareseatselector'
 
 from .forms import CreateUserForm
 
+class TimeSlotCreate(CreateView):
+    model = TimeSlot
+    fields = '__all__'
+    success_url = '/index/'
 
 def home(request):
     return render(request, 'home.html')
@@ -37,9 +42,13 @@ def signup(request):
 def index(request):
     userList = User.objects.values()
     # displays all usernames including for user currently signed in
+    timeslot = TimeSlot.objects.values()
     print(userList)
     print(request.user)
-    return render(request, 'index.html', {'userList': userList})
+    return render(request, 'index.html', {
+      'userList': userList,
+      'timeslot': timeslot
+      })
 
 
 
@@ -56,7 +65,8 @@ def add_photo(request, profile_id):
     except:
       print('An error occurred uploading file to S3')
 
-
+def assoc_timeslot(request):
+  return render(request, 'profile/detail.html')
 
 class ProfileCreate(CreateView):
   model = Profile

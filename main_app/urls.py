@@ -12,6 +12,9 @@ urlpatterns = [
     path('profile/create/', views.ProfileCreate.as_view(), name='profile_create'),
     path('profile/<int:pk>/update/', views.ProfileUpdate.as_view(), name='profile_update'),
     path('profile/<int:pk>/delete/', views.ProfileDelete.as_view(), name='profile_delete'),
+    path('time/create/', views.TimeSlotCreate.as_view(), name='time_create'),
+    path('profile/<int:profile_id>/assoc_timeslot/<int:timeslot_id>/', views.assoc_timeslot, name='assoc_timeslot'),
+    
 
 
 ]

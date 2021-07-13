@@ -16,6 +16,18 @@
         <button>add</button>
         
     {% endfor %}
+    <br>
+    {% for item in timeslot %}
+        <a href ="{% url 'detail' item.id %}"><p> {{ item.date }} </p></a>
+        <p> {{ item.slot }} </p>
+        <form action="" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn">Select Timeslot</button>
+        </form>
+      {% endfor %}
+    
+    
+    
 
 </body>
 </html>
