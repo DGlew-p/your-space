@@ -7,7 +7,21 @@
 		</div>
 		<div class="flex-login item-b">
 			<form method="post" action="{% url 'login' %}">
-				{% csrf_token %} {{ form.as_p }}
+				{% csrf_token %} 
+        {% comment %} {% load widget_tweaks %} {% endcomment %}
+        {% comment %} <div class="field">
+					<p class="control has-icons-left">
+          {% render_field form.username class+="input is-rounded is-medium signup" placeholder="Username"%}
+            <span class="icon is-small is-left"><i class="fas fa-user"></i></span>
+					</p>
+        </div>
+         <div class="field">
+					<p class="control has-icons-left">
+          {% render_field form.password1 class+="input is-rounded is-medium signup" placeholder="Password"%}
+            <span class="icon is-small is-left"><i class="fas fa-unlock"></i></span>
+					</p>
+        </div> {% endcomment %}
+        {{ form.as_p }}
 				<input type="submit" class="btn" value="login" />
 				<input type="hidden" name="next" value="{{ next }}" />
 			</form>
