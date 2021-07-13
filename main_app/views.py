@@ -36,9 +36,13 @@ def signup(request):
 def index(request):
     userList = User.objects.values()
     # displays all usernames including for user currently signed in
+    timeslot = TimeSlot.objects.values()
     print(userList)
     print(request.user)
-    return render(request, 'index.html', {'userList': userList})
+    return render(request, 'index.html', {
+      'userList': userList,
+      'timeslot': timeslot
+      })
 
 
 def add_photo(request, profile_id):
