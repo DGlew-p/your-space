@@ -13,6 +13,9 @@ class TimeSlot(models.Model):
     def __str__(self):
         return str(self.date) 
 
+    def get_absolute_url(self):
+        return reverse('timeslot_detail', kwargs={'pk': self.pk})
+
 
 class Profile(models.Model):
     name = models.CharField(max_length=100)
