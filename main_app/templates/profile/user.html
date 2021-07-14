@@ -16,7 +16,7 @@
 		{% endfor %}
 	</div>
 	  
-	  <form action="{% url 'add_photo' user.id %}" enctype="multipart/form-data" method="POST">
+	  <form action="{% url 'add_photo' profile.id %}" enctype="multipart/form-data" method="POST">
 		{% csrf_token %}
 		<input type="file" name="photo-file">
 		<br><br>
@@ -50,10 +50,13 @@
 		    	<div class="row">
 		    		<div class="col-6 my-auto">
 		    			<h2 class="font-weight-bold pt-4">Scheduled Slots</h2>
+						{% if profile.timeslots.count %}
                         {% for timeslot in user.profile.timeslots.all %}
                             <li> {{ timeslot.date }} | {{ timeslot.slot }} </li>
                         {% endfor %}
-                        
+						{%else%}
+						<li>No scheduled slots</li>
+                        {% endif%}
                         
                         
                         <hr>

@@ -45,8 +45,8 @@ def userpage(request, user_id):
     user_form = UserForm(instance=request.user)
     profile_form = ProfileForm(instance=request.user.profile)
     profile = Profile.objects.get(user_id=user_id)
-    timeslots = Timeslot.objects.all()
-    print(timeslots)
+    available_timeslots = Timeslot.objects.exclude(id__in = profile.timeslot.all().values_list('id'))
+    print(timeslot)
     return render(request, "profile/user.html", {"user":request.user, "user_form":user_form, "profile_form":profile_form, 'timeslots':timeslots, 'profile':profile })
 
 def home(request):
@@ -133,8 +133,7 @@ def index(request):
     #   })
     
 
-
-def add_photo(request, user_id):
+def add_photo(request, profile_id, user_id):
   photo_file = request.FILES.get('photo-file', None)
   if photo_file:
     s3 = boto3.client('s3')
@@ -142,11 +141,11 @@ def add_photo(request, user_id):
     try:
       s3.upload_fileobj(photo_file, BUCKET, key)
       url = f"{S3_BASE_URL}{BUCKET}/{key}"
-      photo = Photo(url=url, user_id=user_id)
+      photo = Photo(url=url, profile_id=profile_id, user_id=user_id)
       photo.save()
     except:
       print('An error occurred uploading file to S3')
-    return redirect('user', user_id=user_id)
+    return redirect('userpage', profile_id=profile_id, user_id=user_id)
 
 
 
