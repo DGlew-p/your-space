@@ -5,7 +5,7 @@
 
 <div>
   {% for photo in profile.photo_set.all %}
-  <img src="{{photo.url}}">
+  <img class = "photo" src="{{photo.url}}">
   {% empty %}
   <div>No Photos Uploaded</div>
   {% endfor %}
