@@ -135,7 +135,6 @@ def index(request):
     #   })
     
 
-
 def add_photo(request, user_id):
   photo_file = request.FILES.get('photo-file', None)
   if photo_file:
