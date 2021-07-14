@@ -12,7 +12,6 @@
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-
   <main class="container">
     {% block content %}
     {% endblock %}
@@ -22,7 +21,7 @@
       <div class="nav-wrapper">
         <ul class="right">
           {% if user.is_authenticated %}
-            <li><a href="{% url 'logout' %}">Sign Out</a></li>
+            <li><a href="{% url 'home' %}">Sign Out</a></li>
           {% endif %}
         </ul>
       </div>
