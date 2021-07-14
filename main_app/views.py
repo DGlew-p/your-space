@@ -47,7 +47,8 @@ def userpage(request, user_id):
     user_form = UserForm(instance=request.user)
     profile_form = ProfileForm(instance=request.user.profile)
     profile = Profile.objects.get(user_id=user_id)
-    available_timeslots = Timeslot.objects.exclude(id__in = profile.timeslots.all().values_list('id'))
+    available_timeslots = Timeslot.objects.filter(profile=None)
+    # available_timeslots = Timeslot.objects.exclude(id__in = profile.timeslots.all().values_list('id'))
   
     return render(request, "profile/user.html", {"user":request.user, "user_form":user_form, "profile_form":profile_form, 'timeslot':available_timeslots, 'profile':profile })
 
@@ -148,8 +149,6 @@ def add_photo(request, user_id):
     except:
       print('An error occurred uploading file to S3')
     return redirect('userpage', user_id=user_id)
-
-
 
 
 class ProfileCreate(CreateView):
