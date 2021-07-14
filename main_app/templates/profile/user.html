@@ -50,10 +50,17 @@
 		    	<div class="row">
 		    		<div class="col-6 my-auto">
 		    			<h2 class="font-weight-bold pt-4">Scheduled Slots</h2>
+						{% if profile.timeslots.count %}
                         {% for timeslot in user.profile.timeslots.all %}
                             <li> {{ timeslot.date }} | {{ timeslot.slot }} </li>
+							<form action="{% url 'unassoc_timeslot' user.id timeslot.id %}" method="post">
+								{% csrf_token %}
+							  <button type="submit" class="btn">Remove</button>
+							</form>
                         {% endfor %}
-                        
+						{%else%}
+						<li>No scheduled slots</li>
+                        {% endif%}
                         
                         
                         <hr>
@@ -71,7 +78,24 @@
 		    		</div>
 		    	</div>
 		      	<br>
-		      	<div class="row">
+				  <h3>Available Time slots</h3>
+				  {% if timeslot.count %}
+					{% for timeslot in timeslot.all %}
+					<span>{{ timeslot.date}}</span> {{ timeslot.slot}}
+						  </span>
+						</div>
+						<div class="card-action">
+						  <form action="{% url 'assoc_timeslot' user.id timeslot.id %}" method="post">
+							{% csrf_token %}
+							<button type="submit" class="btn">Add</button>
+						  </form>
+						</div>
+					  </div>
+					{% endfor %}
+				  {% else %}
+					<h5>No Timeslots  Available</h5>
+				  {% endif %}
+				</div>
                 
                 
                     <hr>
