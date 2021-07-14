@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% load static %}
 
 <!DOCTYPE html>
@@ -15,17 +16,28 @@
 	<div>
 		{% for photo in profile.photo_set.all %}
 		<img class="circle responsive-img" src="{{photo.url}}">
+=======
+{% extends 'base.html' %} {% block content %}
+    <br><br>
+	<div>
+		{% for photo in profile.photo_set.all %}
+		<div></div>
+		<figure class="image is-128x128">
+			<img class="is-rounded" src="{{photo.url}}">
+		  </figure></div>
+>>>>>>> cd86efbcd374fa57b44b2fb612bfcdb23c37ac84
 		{% empty %}
 		<div>No Photos Uploaded</div>
 		{% endfor %}
 	  </div>
-	  
+	  <div>
 	  <form action="{% url 'add_photo' profile.id %}" enctype="multipart/form-data" method="POST">
 		{% csrf_token %}
 		<input type="file" name="photo-file">
 		<br><br>
 		<input type="submit" class="btn" value="Upload Photo">
 	  </form>
+	  </div>
 	<div class="container mx-auto">
 	    <div class="row">
 	    	<div class="col-sm-12 col-md-12 col-lg-3 pb-4">
@@ -112,3 +124,5 @@
     
 </body>
 </html>
+
+{% endblock %} 

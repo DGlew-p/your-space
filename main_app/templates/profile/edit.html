@@ -9,14 +9,13 @@
 <body>
     <form action="{% url 'profile_update' user.id %}" method="POST">
         {% csrf_token %} 
-        Username: <input value="{{profile.user.username}}" name="username" disabled>
+        {% load widget_tweaks %}
+        <span class="icon is-small is-left"><i class="fas fa-user"></i>Username: <input value="{{profile.user.username}}" name="username" disabled></span>
         First Name: <input value="{{ profile.user.first_name }}" name="first_name">
         Last Name: <input value="{{ profile.user.last_name }}" name="last_name">
         Email: <input value="{{profile.user.email}}" name="email" disabled>
         Role: <input value="{{profile.role}}" name="role">
         <button type="submit">Save</button>
-    
-    
     </form>
 </body>
 </html>

@@ -5,6 +5,7 @@
 	height: 100vh;
 }
 
+
 .flex-home-buttons {
 	display: flex;
 	flex-direction: column;
@@ -86,3 +87,5 @@
 		font-size: 2.2vw;
 	}
 }
+
+
