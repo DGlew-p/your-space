@@ -17,10 +17,12 @@ S3_BASE_URL = 'https://s3.us-east-2.amazonaws.com/'
 BUCKET = 'silverwareseatselector'
 
 def assoc_timeslot(request, user_id, timeslot_id):
-    profile = Profile.objects.get(user_id=user_id).timeslots.add(timeslot_id)
-    print(profile)
-    return redirect('userpage')
+    Profile.objects.get(user_id=user_id).timeslots.add(timeslot_id)
+    return redirect(f'/user/{user_id}')
 
+def unassoc_timeslot(request, user_id, timeslot_id):
+  Profile.objects.get(id=user_id).timeslots.remove(timeslot_id)
+  return redirect(f'/user/{user_id}')
 
 
 def profile_update(request, user_id):
@@ -45,9 +47,9 @@ def userpage(request, user_id):
     user_form = UserForm(instance=request.user)
     profile_form = ProfileForm(instance=request.user.profile)
     profile = Profile.objects.get(user_id=user_id)
-    available_timeslots = Timeslot.objects.exclude(id__in = profile.timeslot.all().values_list('id'))
-    print(timeslot)
-    return render(request, "profile/user.html", {"user":request.user, "user_form":user_form, "profile_form":profile_form, 'timeslots':timeslots, 'profile':profile })
+    available_timeslots = Timeslot.objects.exclude(id__in = profile.timeslots.all().values_list('id'))
+  
+    return render(request, "profile/user.html", {"user":request.user, "user_form":user_form, "profile_form":profile_form, 'timeslot':available_timeslots, 'profile':profile })
 
 def home(request):
     timeslot = Timeslot.objects.all()
