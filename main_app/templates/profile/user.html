@@ -1,22 +1,3 @@
-<<<<<<< HEAD
-{% load static %}
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-    <title>Document</title>
-</head>
-<body>
-    <br><br>
-	<div>
-		{% for photo in profile.photo_set.all %}
-		<img class="circle responsive-img" src="{{photo.url}}">
-=======
 {% extends 'base.html' %} {% block content %}
     <br><br>
 	<div>
@@ -25,7 +6,6 @@
 		<figure class="image is-128x128">
 			<img class="is-rounded" src="{{photo.url}}">
 		  </figure></div>
->>>>>>> cd86efbcd374fa57b44b2fb612bfcdb23c37ac84
 		{% empty %}
 		<div>No Photos Uploaded</div>
 		{% endfor %}
