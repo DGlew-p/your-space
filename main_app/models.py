@@ -1,35 +1,46 @@
 from django.db import models
 from django.forms import ModelForm
 from django.urls import reverse
+from django.dispatch import receiver
+#
+from django.db.models.signals import post_save
+#
 from datetime import date, datetime
 from django.contrib.auth.models import User
 # Create your models here.
 
 
-class TimeSlot(models.Model):
-    date = models.DateField()
+class Timeslot(models.Model):
+    date = models.DateTimeField()
     slot = models.CharField(max_length=50)
 
     def __str__(self):
-        return str(self.date) 
+        return self.slot 
 
-    def get_absolute_url(self):
-        return reverse('timeslot_detail', kwargs={'pk': self.pk})
+    # def get_absolute_url(self):
+    #     return reverse('timeslot_detail', kwargs={'pk': self.pk})
+    
 
 
 class Profile(models.Model):
-    name = models.CharField(max_length=100)
-    bio = models.CharField(max_length=100)
-    role = models.TextField(max_length=250)
-    timeSlot = models.ManyToManyField(TimeSlot)
-    buddy = models.ManyToManyField(User, related_name='buddy', blank=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-
+    
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    timeslots = models.ManyToManyField(Timeslot)
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance)
+    #
+    @receiver(post_save, sender=User)
+    def save_user_profile(sender, instance, **kwargs):
+        instance.profile.save()
+    #
+    
     def __str__(self):
-        return self.user
+        return self.user.username
 
-    def get_absolute_url(self):
-        return reverse('detail', kwargs={'profile_id': self.id})
+    # def get_absolute_url(self):
+    #     return reverse('detail', kwargs={'profile_id': self.id})
 
 
 class Photo(models.Model):
