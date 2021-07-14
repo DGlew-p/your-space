@@ -25,25 +25,29 @@ def assoc_timeslot(request, user_id, timeslot_id):
 
 def profile_update(request, user_id):
     user = User.objects.get(id=user_id)
+    profile = Profile.objects.get(user_id=user_id)
     print(user.username)
     
     user.first_name = request.POST['first_name']
     user.last_name = request.POST['last_name']
-
+    profile.role = request.POST['role']
     user.save()
+    profile.save()
+    print(profile.role)
     print(user.first_name)
-    return redirect('/user')
+    return redirect(f'/user/{user.id}')
 
 def profile_edit(request, user_id):
     profile = Profile.objects.get(user_id=user_id)
     return render(request, 'profile/edit.html', {'profile': profile})
 
-def userpage(request):
+def userpage(request, user_id):
     user_form = UserForm(instance=request.user)
     profile_form = ProfileForm(instance=request.user.profile)
+    profile = Profile.objects.get(user_id=user_id)
     timeslots = Timeslot.objects.all()
     print(timeslots)
-    return render(request, "profile/user.html", {"user":request.user, "user_form":user_form, "profile_form":profile_form, 'timeslots':timeslots })
+    return render(request, "profile/user.html", {"user":request.user, "user_form":user_form, "profile_form":profile_form, 'timeslots':timeslots, 'profile':profile })
 
 def home(request):
     timeslot = Timeslot.objects.all()
