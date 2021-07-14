@@ -147,7 +147,9 @@ def add_photo(request, profile_id, user_id):
       photo.save()
     except:
       print('An error occurred uploading file to S3')
-    return redirect('userpage', profile_id=profile_id, user_id=user_id)
+
+    return redirect('userpage', user_id=user_id)
+
 
 
 
