@@ -2,7 +2,7 @@
 {% block content %}
     
     <h2>Hi! Welcome to the app, <span style="color: red;">{{ request.user }}</span>! </h2>
-    <a class="btn btn-sm btn-outline-primary m-2"  href="/user"><span style="color:red">View your profile, {{user.first_name|title}}</span></a>
+    <a class="btn btn-sm btn-outline-primary m-2"  href="{% url 'userpage' user.id %}"><span style="color:red">View your profile, {{user.first_name|title}}</span></a>
     
     
     

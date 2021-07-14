@@ -20,7 +20,8 @@
 			    		<p class="text-muted mb-0" style="font-size: 12px">Name:</p>
 				  		<p>{{ user.first_name }} {{ user.last_name }}</p>
 				  		<p class="text-muted mb-0" style="font-size: 12px">Email:</p>
-				  		<p>{{ user.email }} </p>
+				  		<p>{{ user.email }} </p><br>
+                        <p>Role: {{ profile.role }} </p>
                           <div class="text-right">
 							<a href="{% url 'profile_edit' user.id %}">Edit Profile</a>
 						</div>
