@@ -13,22 +13,95 @@
 	align-items: center;
 }
 
+.flex-dashboard-buttons {
+	display: flex;
+	justify-content: center;
+
+}
+
+.flex-dashboard-buttons p {
+	margin-right: 1rem;
+	padding: 2rem;
+}
+
 .flex-login {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 }
 
+.flex-back-button{
+	display: flex;
+	justify-content: end;
+	margin-top: 4rem;
+}
+
+.home-grid-signup {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr auto 1fr auto;
+}
+
+.card-content.slot {
+	padding: 1rem !important;
+}
+
+.bookSlots {
+	line-height: 2.4rem;
+}
+.card.seperation {
+	margin-bottom: 1rem;
+}
+
+.dashboard-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: auto;
+	font-family: 'Roboto', sans-serif;
+}
+
+.dash-flex {
+	display: flex;
+	justify-content: center;
+}
+
+.welcome-dash {
+	font-weight: 500;
+	font-size: 2rem;
+}
+
+.login-padd {
+	margin-bottom: 4rem;
+}
+
+.home-grid-login {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr auto auto auto;
+}
+
 .home-grid {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	grid-template-rows: 25vh 50vh 25vh;
+	grid-template-rows: 1fr 1fr 1fr;
+
+
 }
 .item-a {
 	grid-column-start: 1;
 	grid-column-end: 2;
-	grid-row-start: 2;
+	grid-row-start: 1;
 }
+
+
+
+.cowork {
+	object-fit: cover;
+	width: 100%;
+	max-height: 100%;
+	align-self: center;
+}
+
 
 .item-b {
 	grid-column-start: 2;
@@ -36,14 +109,102 @@
 	grid-row-start: 2;
 }
 
+.item-b-signup {
+	grid-column-start: 1;
+	grid-column-end: 3;
+	grid-row-start: 3;
+}
+
+.item-a-signup{
+	grid-column-start: 1;
+	grid-column-end: 3;
+	grid-row-start: 2;
+}
+
+.item-a-logo {
+	grid-column-start: 1;
+	grid-column-end: 3;
+	grid-row-start: 1;
+}
+
+.text-signup {
+	text-align: center;
+	font-family: 'Lora', serif;
+	font-size: 2rem;
+}
+
+.item-c {
+	grid-column-start: 2;
+	grid-column-end: 3;
+	grid-row-start: 1;
+	font-family: 'Lora', serif;
+	font-size: 2rem;
+	text-align: center;
+	align-self: end;
+}
+
+.carousel {
+	align-self: center;
+	object-fit: cover;
+  	width: 100%;
+  	max-height: 100%;
+}
+
 .item-d {
 	position: absolute;
-	top: 30%;
-	left: 20%;
+	top: 40%;
+	left: 13%;
 	font-size: 3rem;
 	margin-bottom: 1rem;
 	font-family: 'Lora', serif;
 }
+
+.item-d-logo {
+	position: absolute;
+	top: 40%;
+	left: 35%;
+	font-size: 3rem;
+	margin-bottom: 1rem;
+	font-family: 'Lora', serif;
+}
+
+.item-d-logo-dash {
+	position: absolute;
+	top: 40%;
+	left: 1%;
+	font-size: 3rem;
+	margin-bottom: 1rem;
+	font-family: 'Lora', serif;
+}
+
+.dashboard-flex {
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+}
+
+.welcome-dash {
+    font-weight: 500;
+    text-align: center;
+    padding: 2rem;
+}
+
+.item-i {
+	grid-column-start: 2;
+	grid-column-end: 2;
+	grid-row-start: 4;
+}
+
+.item-h {
+	font-family: 'Lora', serif;
+	grid-column-start: 1;
+	grid-column-end: 3;
+	grid-row-start: 3;
+	font-size: 2.5rem;
+	text-align: center;
+	align-self: center;
+}
+
 
 .box-relative {
 	position: relative;
@@ -53,7 +214,7 @@
 	background-color: #ffee53;
 	width: 32%;
 	padding: 1.5rem;
-	font-size: 1.2vw;
+	font-size: 1vw;
 	margin-bottom: 1rem;
 	font-family: 'Roboto', sans-serif;
 }
@@ -68,7 +229,7 @@
 @media (max-width: 575.98px) {
 	.home-grid {
 		grid-template-columns: 1fr;
-		grid-template-rows: 30vh 40vh;
+		grid-template-rows: auto auto 1fr 1fr auto;
 	}
 
 	.item-a {
@@ -77,15 +238,68 @@
 		grid-row-start: 1;
 	}
 
-	.item-b {
+	.item-c {
 		grid-column-start: 1;
 		grid-column-end: 2;
 		grid-row-start: 2;
+		align-self: center;
+		padding:2rem;
+		font-size: 1.5rem;
+	}
+
+	.carousel {
+		grid-column-start: 1;
+		grid-column-end: 2;
+		grid-row-start: 3;
+	}
+
+	.item-b {
+		grid-column-start: 1;
+		grid-column-end: 2;
+		grid-row-start: 4;
+	}
+
+	.item-h {
+		grid-column-start: 1;
+		grid-column-end: 2;
+		grid-row-start: 5;
+		font-size: 1.5rem;
 	}
 
 	.button.create {
 		font-size: 2.2vw;
 	}
+
+	.item-d-logo, .item-d{
+		left: 25%;
+	}
+
+	.text-signup {
+		margin-bottom: 3rem;
+		margin-top: 3rem;
+	}
+
+	.item-a-signup{
+		margin-top: 5rem;
+		margin-bottom: 5rem;
+	}
+
+	.flex-back-button {
+		margin-top: 4rem;
+	}
+
+	.flex-dashboard-buttons {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.flex-dashboard-buttons p {
+		margin-right: 0;
+		padding: 1rem;
+		margin-bottom: 1rem;
+	}
+	
 }
 
 
