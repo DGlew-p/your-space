@@ -2,11 +2,11 @@
 <div class="home-frame">
 	<div class="home-grid">
 		<div class="item-a box-relative flex-home-buttons">
-			<h1 class="item-d">/sw&emacr;t/</h1>
-			<img {% load static %}src="{% static "images/bg.png" %}" alt="">
+			<h1 class="item-d">/your-space/</h1>
+			<img class="item-g" {% load static %}src="{% static "images/bg.png" %}" alt="">
 		</div>
-		<div class="flex-login item-b">
-
+		<h2 class="item-c flex-home-buttons">Sign Up For An Account Here</h2>
+		<div class="flex-login item-b-signup">
 			{% if error_message %}
 			<p class="red-text">{{ error_message }}</p>
 			{% endif %}
@@ -37,9 +37,10 @@
             <span class="icon is-small is-left"><i class="fas fa-unlock"></i></span>
 					</p>
         </div>
-				<input type="submit" class="button" value="signup" />
+				<input type="submit" class="button" value="Submit" />
 			</form>
 		</div>
+		<img class="item-i" {% load static %}src="{% static "images/back-button.png" %}" alt="">
 	</div>
 </div>
 {% endblock %}
