@@ -35,7 +35,6 @@ Jinja2==3.0.1
 jinja2-time==0.2.0
 jmespath==0.10.0
 keyring==18.0.1
-language-selector==0.1
 launchpadlib==1.10.13
 lazr.restfulclient==0.14.2
 lazr.uri==1.0.3
@@ -87,12 +86,8 @@ ssh-import-id==5.10
 systemd-python==234
 text-unidecode==1.3
 toml==0.10.2
-ubuntu-advantage-tools==27.0
-ubuntu-drivers-common==0.0.0
 ufw==0.36
-unattended-upgrades==0.1
 urllib3==1.25.8
-usb-creator==0.3.7
 virtualenv==20.4.7
 virtualenv-clone==0.5.4
 wadllib==1.3.3
