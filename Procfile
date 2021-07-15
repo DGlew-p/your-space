@@ -1,0 +1,1 @@
+web: gunicorn seat_tracker.wsgi

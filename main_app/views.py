@@ -9,6 +9,8 @@ from django.contrib import messages
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from .forms import NewUserForm, UserForm, ProfileForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 import uuid
 import boto3
 
@@ -17,16 +19,23 @@ S3_BASE_URL = 'https://s3.us-east-2.amazonaws.com/'
 BUCKET = 'silverwareseatselector'
 
 
+
+@login_required
 def assoc_timeslot(request, user_id, timeslot_id):
     Profile.objects.get(user_id=user_id).timeslots.add(timeslot_id)
     return redirect(f'/user/{user_id}/timeslot')
 
 
+@login_required
+def unassoc_timeslot(request, user_id, timeslot_id):
+  Profile.objects.get(id=user_id).timeslots.remove(timeslot_id)
+  return redirect(f'/user/{user_id}/timeslot')
+
 def unassoc_timeslot(request, user_id, timeslot_id):
     Profile.objects.get(id=user_id).timeslots.remove(timeslot_id)
     return redirect(f'/user/{user_id}/timeslot')
 
-
+@login_required
 def profile_update(request, user_id):
     user = User.objects.get(id=user_id)
     profile = Profile.objects.get(user_id=user_id)
@@ -41,12 +50,13 @@ def profile_update(request, user_id):
     print(user.first_name)
     return redirect(f'/user/{user.id}')
 
-
+@login_required
 def profile_edit(request, user_id):
     profile = Profile.objects.get(user_id=user_id)
     return render(request, 'profile/edit.html', {'profile': profile})
 
 
+@login_required
 def userpage(request, user_id):
     user_form = UserForm(instance=request.user)
     profile_form = ProfileForm(instance=request.user.profile)
@@ -55,7 +65,7 @@ def userpage(request, user_id):
 
     return render(request, "profile/user.html", {"user": request.user, "user_form": user_form, "profile_form": profile_form, 'timeslot': available_timeslots, 'profile': profile})
 
-
+@login_required
 def index(request):
 
     userList = User.objects.values()
@@ -71,11 +81,12 @@ def index(request):
         'profile': profile
     })
 
-
+@login_required
 def home(request):
     timeslot = Timeslot.objects.all()
     print(timeslot)
     return render(request, 'home.html', {'timeslot': timeslot})
+
 
 
 def login_request(request):
@@ -85,7 +96,6 @@ def login_request(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
-#
             if user is not None:
                 login(request, user)
                 messages.info(request, f"You are now logged in as {username}.")
@@ -106,51 +116,32 @@ def signup(request):
             login(request, user)
             return redirect('index')
     form = NewUserForm
+
     return render(request=request, template_name="register.html", context={"form": form})
 
-
-# def signup(request):
-#     error_message = ''
-#     if request.method == 'POST':
-#         form = CreateUserForm(request.POST)
-#         if form.is_valid():
-#             user = form.save()
-#             login(request, user)
-#             return redirect('index')
-#         else:
-#             error_message = 'Invalid sign up - try again'
-#     form = CreateUserForm()
-#     context = {'form': form, 'error_message': error_message}
-#     return render(request, 'registration/signup.html', context)
-
-    # if not request.user.is_authenticated:
-    #     print("authenticated")
-    #     return HttpResponse("yes")
-    # else:
-    #     print("no")
-    #     return render(request, 'index.html', {
-    #   'userList': userList,
-    #   'timeslot': timeslot
-    #   })
-
-
+    
+@login_required
 def add_photo(request, user_id):
-    photo_file = request.FILES.get('photo-file', None)
-    if photo_file:
-        s3 = boto3.client('s3')
-        key = uuid.uuid4().hex[:6] + \
-            photo_file.name[photo_file.name.rfind('.'):]
-    try:
-        s3.upload_fileobj(photo_file, BUCKET, key)
-        url = f"{S3_BASE_URL}{BUCKET}/{key}"
-        photo = Photo(url=url, user_id=user_id)
-        photo.save()
-    except:
-        print('An error occurred uploading file to S3')
+  photo_file = request.FILES.get('photo-file', None)
+  if photo_file:
+    s3 = boto3.client('s3')
+    key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+  try:
+      s3.upload_fileobj(photo_file, BUCKET, key)
+      url = f"{S3_BASE_URL}{BUCKET}/{key}"
+      photo = Photo(url=url, user_id=user_id)
+      photo.save()
+  except:
+      print('An error occurred uploading file to S3')
+  return redirect('userpage', user_id=user_id)
+
+
+def photo_delete(request,user_id):
+    photo = Photo.objects.get(user_id=user_id)
+    photo.delete()
     return redirect('userpage', user_id=user_id)
 
-
-class ProfileCreate(CreateView):
+class ProfileCreate(LoginRequiredMixin, CreateView):
     model = Profile
     fields = ['name', 'bio', 'role']
 
@@ -159,25 +150,25 @@ class ProfileCreate(CreateView):
         return super().form_valid(form)
 
 
-class ProfileUpdate(UpdateView):
+class ProfileUpdate(LoginRequiredMixin, UpdateView):
     model = Profile
     fields = ['name', 'bio', 'role']
 
 
-class ProfileDelete(DeleteView):
+class ProfileDelete(LoginRequiredMixin, DeleteView):
     model = Profile
     success_url = '/'
 
-
+@login_required
 def profile_detail(request, profile_id):
     profile = Profile.objects.get(id=profile_id)
     return render(request, 'profile/detail.html', {'profile': profile})
 
-
-class TimeslotDetail(DetailView):
+class TimeslotDetail(LoginRequiredMixin, DetailView):
     model = Timeslot
 
 
+@login_required
 def timeslot_index(request, user_id):
     user_form = UserForm(instance=request.user)
     profile_form = ProfileForm(instance=request.user.profile)
