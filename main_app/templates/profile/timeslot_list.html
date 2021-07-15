@@ -16,16 +16,6 @@
 		    <li>No scheduled slots</li>
 {% endif%}
                                           
-<h2 class="font-weight-bold pt-4">All Slots</h2>
-
-    {% for time in timeslots %}
-            <li> {{ time.date }} | {{ time.slot }}  </li>
-            <form action="{% url 'assoc_timeslot' user.id time.id %}" method="post">
-    {% csrf_token %}
-            <button type="submit">add</button>
-            </form>
-                            
-    {% endfor %}
 		    	
 <h3>Available Time slots</h3>
 {% if timeslot.count %}

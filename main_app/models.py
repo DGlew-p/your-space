@@ -17,6 +17,9 @@ class Timeslot(models.Model):
     def __str__(self):
         return self.slot
 
+    class Meta:
+        ordering = ['date']
+
     # def get_absolute_url(self):
     #     return reverse('timeslot_detail', kwargs={'pk': self.pk})
 
