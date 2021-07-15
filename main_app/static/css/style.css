@@ -184,6 +184,7 @@
 		grid-row-start: 2;
 		align-self: center;
 		padding:2rem;
+		font-size: 1.5rem;
 	}
 
 	.carousel {
@@ -202,6 +203,7 @@
 		grid-column-start: 1;
 		grid-column-end: 2;
 		grid-row-start: 5;
+		font-size: 1.5rem;
 	}
 
 	.button.create {
