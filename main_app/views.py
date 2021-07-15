@@ -43,7 +43,11 @@ def profile_update(request, user_id):
 
     user.first_name = request.POST['first_name']
     user.last_name = request.POST['last_name']
+    user.email= request.POST['email']
     profile.role = request.POST['role']
+    profile.bio = request.POST['bio']
+    profile.linkedin = request.POST['linkedin']
+    
     user.save()
     profile.save()
     print(profile.role)
@@ -81,7 +85,7 @@ def index(request):
         'profile': profile
     })
 
-@login_required
+
 def home(request):
     timeslot = Timeslot.objects.all()
     print(timeslot)
@@ -98,7 +102,7 @@ def login_request(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                messages.info(request, f"You are now logged in as {username}.")
+                messages.success(request, f"You are now logged in as {username}.")
                 return redirect("index")
             else:
                 messages.error(request, "Invalid username or password.")
