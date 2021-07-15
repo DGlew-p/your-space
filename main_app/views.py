@@ -16,21 +16,22 @@ import boto3
 S3_BASE_URL = 'https://s3.us-east-2.amazonaws.com/'
 BUCKET = 'silverwareseatselector'
 
+
 def assoc_timeslot(request, user_id, timeslot_id):
     Profile.objects.get(user_id=user_id).timeslots.add(timeslot_id)
     return redirect(f'/user/{user_id}/timeslot')
 
-def unassoc_timeslot(request, user_id, timeslot_id):
-  Profile.objects.get(id=user_id).timeslots.remove(timeslot_id)
-  return redirect(f'/user/{user_id}/timeslot')
 
+def unassoc_timeslot(request, user_id, timeslot_id):
+    Profile.objects.get(id=user_id).timeslots.remove(timeslot_id)
+    return redirect(f'/user/{user_id}/timeslot')
 
 
 def profile_update(request, user_id):
     user = User.objects.get(id=user_id)
     profile = Profile.objects.get(user_id=user_id)
     print(user.username)
-    
+
     user.first_name = request.POST['first_name']
     user.last_name = request.POST['last_name']
     profile.role = request.POST['role']
@@ -40,9 +41,11 @@ def profile_update(request, user_id):
     print(user.first_name)
     return redirect(f'/user/{user.id}')
 
+
 def profile_edit(request, user_id):
     profile = Profile.objects.get(user_id=user_id)
     return render(request, 'profile/edit.html', {'profile': profile})
+
 
 def userpage(request, user_id):
     user_form = UserForm(instance=request.user)
@@ -50,7 +53,7 @@ def userpage(request, user_id):
     profile = Profile.objects.get(user_id=user_id)
     available_timeslots = Timeslot.objects.filter(profile=None)
 
-    return render(request, "profile/user.html", {"user":request.user, "user_form":user_form, "profile_form":profile_form, 'timeslot':available_timeslots, 'profile':profile })
+    return render(request, "profile/user.html", {"user": request.user, "user_form": user_form, "profile_form": profile_form, 'timeslot': available_timeslots, 'profile': profile})
 
 
 def index(request):
@@ -61,38 +64,39 @@ def index(request):
     profile = Profile.objects.get(user_id=request.user.id)
     profile_timeslot = profile.timeslots.all()
 
-
     return render(request, 'index.html', {
-      'userList': userList,
-      'timeslot': timeslot,
-      'profile_timeslot': profile_timeslot,
-      'profile':profile 
-      })
+        'userList': userList,
+        'timeslot': timeslot,
+        'profile_timeslot': profile_timeslot,
+        'profile': profile
+    })
 
 
 def home(request):
     timeslot = Timeslot.objects.all()
     print(timeslot)
-    return render(request, 'home.html', {'timeslot':timeslot})
+    return render(request, 'home.html', {'timeslot': timeslot})
+
 
 def login_request(request):
-	if request.method == "POST":
-		form = AuthenticationForm(request, data=request.POST)
-		if form.is_valid():
-			username = form.cleaned_data.get('username')
-			password = form.cleaned_data.get('password')
-			user = authenticate(username=username, password=password)
-            #
-			if user is not None:
-				login(request, user)
-				messages.info(request, f"You are now logged in as {username}.")
-				return redirect("index")
-			else:
-				messages.error(request,"Invalid username or password.")
-		else:
-			messages.error(request,"Invalid username or password.")
-	form = AuthenticationForm()
-	return render(request, "registration/login.html", {"form":form})
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+#
+            if user is not None:
+                login(request, user)
+                messages.info(request, f"You are now logged in as {username}.")
+                return redirect("index")
+            else:
+                messages.error(request, "Invalid username or password.")
+        else:
+            messages.error(request, "Invalid username or password.")
+    form = AuthenticationForm()
+    return render(request, "registration/login.html", {"form": form})
+
 
 def signup(request):
     if request.method == "POST":
@@ -102,9 +106,7 @@ def signup(request):
             login(request, user)
             return redirect('index')
     form = NewUserForm
-    return render (request=request, template_name="register.html", context={"form":form})
-
-
+    return render(request=request, template_name="register.html", context={"form": form})
 
 
 # def signup(request):
@@ -121,14 +123,6 @@ def signup(request):
 #     context = {'form': form, 'error_message': error_message}
 #     return render(request, 'registration/signup.html', context)
 
-
-
-
-    
-
-    
-
-
     # if not request.user.is_authenticated:
     #     print("authenticated")
     #     return HttpResponse("yes")
@@ -138,20 +132,21 @@ def signup(request):
     #   'userList': userList,
     #   'timeslot': timeslot
     #   })
-    
+
 
 def add_photo(request, user_id):
-  photo_file = request.FILES.get('photo-file', None)
-  if photo_file:
-    s3 = boto3.client('s3')
-    key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+    photo_file = request.FILES.get('photo-file', None)
+    if photo_file:
+        s3 = boto3.client('s3')
+        key = uuid.uuid4().hex[:6] + \
+            photo_file.name[photo_file.name.rfind('.'):]
     try:
-      s3.upload_fileobj(photo_file, BUCKET, key)
-      url = f"{S3_BASE_URL}{BUCKET}/{key}"
-      photo = Photo(url=url, user_id=user_id)
-      photo.save()
+        s3.upload_fileobj(photo_file, BUCKET, key)
+        url = f"{S3_BASE_URL}{BUCKET}/{key}"
+        photo = Photo(url=url, user_id=user_id)
+        photo.save()
     except:
-      print('An error occurred uploading file to S3')
+        print('An error occurred uploading file to S3')
     return redirect('userpage', user_id=user_id)
 
 
@@ -182,15 +177,15 @@ def profile_detail(request, profile_id):
 class TimeslotDetail(DetailView):
     model = Timeslot
 
+
 def timeslot_index(request, user_id):
     user_form = UserForm(instance=request.user)
     profile_form = ProfileForm(instance=request.user.profile)
     profile = Profile.objects.get(user_id=user_id)
     available_timeslots = Timeslot.objects.filter(profile=None)
     return render(request, 'profile/timeslot_list.html', {
-    "user":request.user,
-    "user_form":user_form, 
-    "profile_form":profile_form, 
-    'timeslot':available_timeslots, 
-    'profile':profile })
-
+        "user": request.user,
+        "user_form": user_form,
+        "profile_form": profile_form,
+        'timeslot': available_timeslots,
+        'profile': profile})
