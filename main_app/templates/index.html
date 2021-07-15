@@ -1,8 +1,17 @@
 {% extends 'base.html' %} 
 {% block content %}
     <div class="home-frame">
+        <div class="dashboard-grid">
+            <div class="box-relative flex-home-buttons">
+			    <h1 class="item-d-logo">/your-space/</h1>
+			    <img {% load static %}src="{% static "images/bg.png" %}" alt="">
+		    </div>
             <div class="row1">
                 <h1 class="welcome-dash">Welcome to /your-space/ <span>{{ request.user }}</span>!</h2>
+                <div class="flex-dashboard-buttons">
+                    <p><a class="button" href="/user/{{user.id}}/timeslot/"><span class="bookSlots">Edit Your Spaces</span></a></p>
+                    <p><a class="button"href="{% url 'userpage' user.id %}">View your profile</a></p>
+                </div>
             </div>
             <div class="row2">
                 {% if profile.timeslots.count %}
@@ -10,53 +19,33 @@
             </div>
             <div class="row3">
                 {% for timeslot in user.profile.timeslots.all %}
-                <div class="card">
+                <div class="card seperation">
                     <header class="card-header">
-                        <p class="card-header-title">{{ timeslot.date }} | {{ timeslot.slot }}</p>
+                        <p class="card-header-title">Date of Booking: {{ timeslot.date }}</p>
                         <button class="card-header-icon" aria-label="more options">
                             <span class="icon"><i class="fas fa-angle-down" aria-hidden="true"></i></span>
                         </button>                   
                     </header>                   
-                    <div class="card-content">
+                    <div class="card-content slot">
                     <div class="content">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
+                      <p class="card-header-title">Time Slot of Booking: {{ timeslot.slot }}</p>
                     </div>
                 </div>
                 <footer class="card-footer">
-                    <form action="{% url 'unassoc_timeslot' user.id timeslot.id %}" method="post">
+                    {% comment %} <form action="{% url 'unassoc_timeslot' user.id timeslot.id %}" method="post">
                         {% csrf_token %}
                         <button type="submit" class="btn">Remove</button>
                     </form>
-                    <p><a href="/user/{{user.id}}/timeslot/"><span style=>Book more timeslots </span></a></p>
-                </footer>
+                    <p><a href="/user/{{user.id}}/timeslot/"><span class="bookSlots">Book more timeslots </span></a></p>{% endcomment %}
+                </footer> 
                 {% endfor %}
                 {%else%}
                     <p>You currently have no scheduled bookings</p>
+                    <p><a class="btn btn-sm btn-outline-primary m-2"  href="/user/{{user.id}}/timeslot/"><span style=>Book more timeslots </span></a></p>
                 {% endif%}
-            </div>
+            </div>   
         </div>
     </div>
-
-    
-  
-  
-    
-  
- 
-
-    <p><a class="btn btn-sm btn-outline-primary m-2"  href="{% url 'userpage' user.id %}"><span style="color:red">View your profile, {{user.first_name|title}}</span></a></p>
-    <p><a class="btn btn-sm btn-outline-primary m-2"  href="/user/{{user.id}}/timeslot/"><span style=>Book more timeslots </span></a></p>
-    {% if profile.timeslots.count %}
-    <h1>Here are your current bookings: </h1>
-        {% for timeslot in user.profile.timeslots.all %}
-            <li> {{ timeslot.date }} | {{ timeslot.slot }} </li>
-		    <form action="{% url 'unassoc_timeslot' user.id timeslot.id %}" method="post">
-			    {% csrf_token %}
-			    <button type="submit" class="btn">Remove</button>
-		    </form>
-        {% endfor %}
-	{%else%}
-	    <p>You currently have no scheduled bookings</p>
-    {% endif%}
+</div>
     
 {% endblock %} 
