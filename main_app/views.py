@@ -43,6 +43,7 @@ def profile_update(request, user_id):
 
     user.first_name = request.POST['first_name']
     user.last_name = request.POST['last_name']
+    user.email= request.POST['email']
     profile.role = request.POST['role']
     profile.bio = request.POST['bio']
     profile.linkedin = request.POST['linkedin']

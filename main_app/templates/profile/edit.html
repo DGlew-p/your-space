@@ -15,7 +15,7 @@
         {% csrf_token %} 
         {% load widget_tweaks %}
         
-        <span class="icon is-small is-left"><i class="fas fa-user"></i>Username<span class="required">*</span>: <input value="{{profile.user.username}}" name="username" required></span>
+        <span class="icon is-small is-left"><i class="fas fa-user"></i>Username<span class="required">*</span>: <input value="{{profile.user.username}}" name="username" required disabled></span>
         First Name<span class="required">*</span>: <input value="{{ profile.user.first_name }}" name="first_name" placeholder="e.g John" required>
         Last Name<span class="required">*</span>: <input value="{{ profile.user.last_name }}" name="last_name" placeholder="e.g Smith" required>
         Email<span class="required">*</span>: <input value="{{profile.user.email}}" name="email" placeholder="e.g example@gmail.com" required>
