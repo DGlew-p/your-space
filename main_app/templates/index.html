@@ -3,6 +3,20 @@
     
     <h2>Hi! Welcome to the app, <span style="color: red;">{{ request.user }}</span>! </h2>
     <a class="btn btn-sm btn-outline-primary m-2"  href="{% url 'userpage' user.id %}"><span style="color:red">View your profile, {{user.first_name|title}}</span></a>
+
+    
+    {% if profile.timeslots.count %}
+    <h1>Here are your current bookings: </h1>
+        {% for timeslot in user.profile.timeslots.all %}
+            <li> {{ timeslot.date }} | {{ timeslot.slot }} </li>
+		    <form action="{% url 'unassoc_timeslot' user.id timeslot.id %}" method="post">
+			    {% csrf_token %}
+			    <button type="submit" class="btn">Remove</button>
+		    </form>
+        {% endfor %}
+	{%else%}
+	    <p>You currently have no scheduled bookings</p>
+    {% endif%}
     
     
     
