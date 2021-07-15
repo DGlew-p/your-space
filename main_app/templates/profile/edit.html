@@ -1,3 +1,6 @@
+{% load static %}
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,17 +8,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
 <body>
     <form action="{% url 'profile_update' user.id %}" method="POST">
         {% csrf_token %} 
         {% load widget_tweaks %}
-        <span class="icon is-small is-left"><i class="fas fa-user"></i>Username: <input value="{{profile.user.username}}" name="username" disabled></span>
-        First Name: <input value="{{ profile.user.first_name }}" name="first_name">
-        Last Name: <input value="{{ profile.user.last_name }}" name="last_name">
-        Email: <input value="{{profile.user.email}}" name="email" disabled>
+        
+        <span class="icon is-small is-left"><i class="fas fa-user"></i>Username<span class="required">*</span>: <input value="{{profile.user.username}}" name="username" required></span>
+        First Name<span class="required">*</span>: <input value="{{ profile.user.first_name }}" name="first_name" placeholder="e.g John" required>
+        Last Name<span class="required">*</span>: <input value="{{ profile.user.last_name }}" name="last_name" placeholder="e.g Smith" required>
+        Email<span class="required">*</span>: <input value="{{profile.user.email}}" name="email" placeholder="e.g example@gmail.com" required>
         Role: <input value="{{profile.role}}" name="role">
+        Bio: <input value="{{profile.bio}}" name="bio">
+        LinkedIn: <input value="{{profile.linkedin}}" name="linkedin" placeholder="https://www.linkedin.com/in/johnsmith/">
         <button type="submit">Save</button>
     </form>
+
+    
 </body>
 </html>
