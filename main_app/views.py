@@ -104,40 +104,6 @@ def signup(request):
     form = NewUserForm
     return render (request=request, template_name="register.html", context={"form":form})
 
-
-
-
-# def signup(request):
-#     error_message = ''
-#     if request.method == 'POST':
-#         form = CreateUserForm(request.POST)
-#         if form.is_valid():
-#             user = form.save()
-#             login(request, user)
-#             return redirect('index')
-#         else:
-#             error_message = 'Invalid sign up - try again'
-#     form = CreateUserForm()
-#     context = {'form': form, 'error_message': error_message}
-#     return render(request, 'registration/signup.html', context)
-
-
-
-
-    
-
-    
-
-
-    # if not request.user.is_authenticated:
-    #     print("authenticated")
-    #     return HttpResponse("yes")
-    # else:
-    #     print("no")
-    #     return render(request, 'index.html', {
-    #   'userList': userList,
-    #   'timeslot': timeslot
-    #   })
     
 
 def add_photo(request, user_id):
@@ -145,15 +111,20 @@ def add_photo(request, user_id):
   if photo_file:
     s3 = boto3.client('s3')
     key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
-    try:
+  try:
       s3.upload_fileobj(photo_file, BUCKET, key)
       url = f"{S3_BASE_URL}{BUCKET}/{key}"
       photo = Photo(url=url, user_id=user_id)
       photo.save()
-    except:
+  except:
       print('An error occurred uploading file to S3')
-    return redirect('userpage', user_id=user_id)
+  return redirect('userpage', user_id=user_id)
 
+
+def photo_delete(request,user_id):
+    photo = Photo.objects.get(user_id=user_id)
+    photo.delete()
+    return redirect('userpage', user_id=user_id)
 
 class ProfileCreate(CreateView):
     model = Profile
