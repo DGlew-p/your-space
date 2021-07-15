@@ -10,17 +10,17 @@
 		<div>
 		  <form action="{% url 'delete_photo' user.id %}" method="POST">
 			{% csrf_token %}
-			<input type="submit" class="btn" value="Delete Photo">
+			<input type="submit" class="button" value="Delete Photo">
 		  </form>
 		</div>
 		{% empty %}
 		<div>No Photos Uploaded</div>
 		<div>
-			<form action="{% url 'add_photo' profile.id %}" enctype="multipart/form-data" method="POST">
+			<form class="button" action="{% url 'add_photo' profile.id %}" enctype="multipart/form-data" method="POST">
 			  {% csrf_token %}
 			  <input type="file" name="photo-file">
 			  <br>
-			  <input type="submit" class="btn" value="Upload Photo">
+			  <input type="submit" class="button is-small is-link is-outlined" value="Upload Photo">
 			</form>
 		</div>
 		{% endfor %}
@@ -57,7 +57,7 @@
 							{% endif %}
 
 						
-						    <a href="{% url 'profile_edit' user.id %}">Edit Profile</a>
+						    <a class="button" href="{% url 'profile_edit' user.id %}">Edit Profile</a>
 						{% endif %}
                           <!-- <div class="text-right">
 							<a href="{% url 'profile_edit' user.id %}">Edit Profile</a>
@@ -69,7 +69,7 @@
 		  	</div>
 		    
     <hr>
-	<p><a class="" href="{% url 'index'%}"><span>Back to the Dashboard</span></a></p>
+	<p><a class="button" href="{% url 'index'%}"><span>Back to the Dashboard</span></a></p>
 </body>
 </html>
 
