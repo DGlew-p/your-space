@@ -40,57 +40,9 @@
 		    	</div>
 
 		  	</div>
-		    <div class="col-sm-12 col-md-12 col-lg-9 pb-4">
-		    </div>
-		    <div class="col-sm-12 col-md-12 col-lg-9 pb-4">
-		    	<div class="row">
-		    		<div class="col-6 my-auto">
-		    			<a href="{% url 'index' %}">View Scheduled Slots!</a>
-                        
-                        
-                        <hr>
-                        
-                        <h2 class="font-weight-bold pt-4">All Slots</h2>
-
-                        {% for time in timeslots %}
-                            <li> {{ time.date }} | {{ time.slot }}  </li>
-                            <form action="{% url 'assoc_timeslot' user.id time.id %}" method="post">
-                                {% csrf_token %}
-                                <button type="submit">add</button>
-                            </form>
-                            
-                        {% endfor %}
-		    		</div>
-		    	</div>
-		      	<br>
-				  <h3>Available Time slots</h3>
-				  {% if timeslot.count %}
-					{% for timeslot in timeslot.all %}
-					<span>{{ timeslot.date}}</span> {{ timeslot.slot}}
-						  </span>
-						</div>
-						<div class="card-action">
-						  <form action="{% url 'assoc_timeslot' user.id timeslot.id %}" method="post">
-							{% csrf_token %}
-							<button type="submit" class="btn">Add</button>
-						  </form>
-						</div>
-					  </div>
-					{% endfor %}
-				  {% else %}
-					<h5>No Timeslots  Available</h5>
-				  {% endif %}
-				</div>
-                
-                
-                    <hr>
-		        </div>
-		    </div> 
-		</div>
-	</div>
-    
+		    
     <hr>
-    
+	<p><a class="" href="{% url 'index'%}"><span>Back to the Dashboard</span></a></p>
 </body>
 </html>
 
