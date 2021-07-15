@@ -18,11 +18,11 @@ BUCKET = 'silverwareseatselector'
 
 def assoc_timeslot(request, user_id, timeslot_id):
     Profile.objects.get(user_id=user_id).timeslots.add(timeslot_id)
-    return redirect(f'/user/{user_id}')
+    return redirect(f'/user/{user_id}/timeslot')
 
 def unassoc_timeslot(request, user_id, timeslot_id):
   Profile.objects.get(id=user_id).timeslots.remove(timeslot_id)
-  return redirect(f'/user/{user_id}')
+  return redirect(f'/user/{user_id}/timeslot')
 
 
 def profile_update(request, user_id):
@@ -48,8 +48,7 @@ def userpage(request, user_id):
     profile_form = ProfileForm(instance=request.user.profile)
     profile = Profile.objects.get(user_id=user_id)
     available_timeslots = Timeslot.objects.filter(profile=None)
-    # available_timeslots = Timeslot.objects.exclude(id__in = profile.timeslots.all().values_list('id'))
-  
+
     return render(request, "profile/user.html", {"user":request.user, "user_form":user_form, "profile_form":profile_form, 'timeslot':available_timeslots, 'profile':profile })
 
 def home(request):
@@ -125,6 +124,7 @@ def index(request):
 
     
 
+
     # if not request.user.is_authenticated:
     #     print("authenticated")
     #     return HttpResponse("yes")
@@ -177,3 +177,16 @@ def profile_detail(request, profile_id):
 
 class TimeslotDetail(DetailView):
     model = Timeslot
+
+def timeslot_index(request, user_id):
+    user_form = UserForm(instance=request.user)
+    profile_form = ProfileForm(instance=request.user.profile)
+    profile = Profile.objects.get(user_id=user_id)
+    available_timeslots = Timeslot.objects.filter(profile=None)
+    return render(request, 'profile/timeslot_list.html', {
+    "user":request.user,
+    "user_form":user_form, 
+    "profile_form":profile_form, 
+    'timeslot':available_timeslots, 
+    'profile':profile })
+

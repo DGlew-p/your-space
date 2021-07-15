@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Times you've booked</h1>
+
+<h2 class="font-weight-bold pt-4">Scheduled Slots</h2>
+{% if profile.timeslots.count %}
+    {% for timeslot in user.profile.timeslots.all %}
+            <li> {{ timeslot.date }} | {{ timeslot.slot }} </li>
+			<form action="{% url 'unassoc_timeslot' user.id timeslot.id %}" method="post">
+	{% csrf_token %}
+			 <button type="submit" class="btn">Remove</button>
+			</form>
+    {% endfor %}
+{%else%}
+		    <li>No scheduled slots</li>
+{% endif%}
+                                          
+<h2 class="font-weight-bold pt-4">All Slots</h2>
+
+    {% for time in timeslots %}
+            <li> {{ time.date }} | {{ time.slot }}  </li>
+            <form action="{% url 'assoc_timeslot' user.id time.id %}" method="post">
+    {% csrf_token %}
+            <button type="submit">add</button>
+            </form>
+                            
+    {% endfor %}
+		    	
+<h3>Available Time slots</h3>
+{% if timeslot.count %}
+    {% for timeslot in timeslot.all %}
+			<span>{{ timeslot.date}}</span> {{ timeslot.slot}}</span>
+						
+            <div class="card-action">
+	        <form action="{% url 'assoc_timeslot' user.id timeslot.id %}" method="post">
+	{% csrf_token %}
+			<button type="submit" class="btn">Add</button>
+        	</form>
+	{% endfor %}
+{% else %}
+            <h5>No Timeslots  Available</h5>
+{% endif %}
+            </div>						
+             
+            <p><a class="" href="{% url 'index'%}"><span>Back to the Dashboard</span></a></p>
+{% endblock %}
