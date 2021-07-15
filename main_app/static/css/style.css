@@ -27,8 +27,24 @@
 
 .home-grid-signup {
 	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-template-rows: 1fr auto 1fr auto;
+	grid-template-columns: 1fr;
+	grid-template-rows: repeat(autofill, 1fr)
+}
+
+.dashboard-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
+	font-family: 'Roboto', sans-serif;
+}
+
+.dash-flex {
+	display: flex;
+	justify-content: center;
+}
+
+.welcome-dash {
+	font-weight: 500;
 }
 
 .login-padd {
