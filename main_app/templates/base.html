@@ -21,7 +21,7 @@
       <div class="nav-wrapper">
         <ul class="right">
           {% if user.is_authenticated %}
-            <li><a href="{% url 'home' %}">Sign Out</a></li>
+            <li><a href="{% url 'logout' %}">Sign Out</a></li>
           {% endif %}
         </ul>
       </div>
