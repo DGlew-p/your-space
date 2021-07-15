@@ -29,7 +29,10 @@
 		</div>
 		<div class="item-b-signup flex-login">
 			<h3>Don't have an account?</h3>
-			<a class="button is-rounded" href="{% url 'signup' %}">Sign up here.</a><br />
+			<a class="button is-rounded" href="{% url 'signup' %}">Sign up here.</a>
+		</div>
+		<div class="item-i flex-back-button">
+			<a href="{% url 'home' %}"><img {% load static %}src="{% static "images/back-button.png" %}" alt=""></a>
 		</div>
 		<div class="item-i flex-back-button">
 			<a href="{% url 'home' %}"><img {% load static %}src="{% static "images/back-button.png" %}" alt=""></a>
