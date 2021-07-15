@@ -1,32 +1,38 @@
 {% extends 'base.html' %} {% block content %}
 <div class="home-frame">
-	<div class="home-grid">
-		<div class="item-a box-relative flex-home-buttons">
-			<h1 class="item-d">/your-space/</h1>
+	<div class="home-grid-login">
+		<div class="item-a-logo box-relative flex-home-buttons">
+			<h1 class="item-d-logo">/your-space/</h1>
 			<img {% load static %}src="{% static "images/bg.png" %}" alt="">
 		</div>
-		<div class="flex-login item-b">
+		<div class="flex-login item-a-signup">
 			<form method="post" action="{% url 'login' %}">
 				{% csrf_token %} 
-        {% load widget_tweaks %}
-        	<div class="field">
+        		{% load widget_tweaks %}
+        		<div class="field">
 					<p class="control has-icons-left">
-          {% render_field form.username class+="input is-rounded is-medium signup" placeholder="Username"%}
-            <span class="icon is-small is-left"><i class="fas fa-user"></i></span>
+          				{% render_field form.username class+="input is-rounded is-medium signup" placeholder="Username"%}
+            			<span class="icon is-small is-left"><i class="fas fa-user"></i></span>
 					</p>
-        </div>
-        <div class="field">
+       		 	</div>
+        		<div class="field">
 					<p class="control has-icons-left">
-          {% render_field form.password class+="input is-rounded is-medium signup" placeholder="Password"%}
-            <span class="icon is-small is-left"><i class="fas fa-unlock"></i></span>
+          				{% render_field form.password class+="input is-rounded is-medium signup" placeholder="Password"%}
+            			<span class="icon is-small is-left"><i class="fas fa-unlock"></i></span>
 					</p>
-        </div>
-        <input class="button" type="submit" class="btn" value="login" />
-				<input type="hidden" name="next" value="{{ next }}" />
+        		</div>
+				<div class="flex-login login-padd">
+					<input class="button is-rounded" type="submit" class="btn" value="Login" />
+					<input type="hidden" name="next" value="{{ next }}" />
+				</div>
 			</form>
-
+		</div>
+		<div class="item-b-signup flex-login">
 			<h3>Don't have an account?</h3>
-			<a class="button is-rounded" href="{% url 'signup' %}">Sign up here.</a><br />
+			<a class="button is-rounded" href="{% url 'signup' %}">Sign up here.</a>
+		</div>
+		<div class="item-i flex-back-button">
+			<a href="{% url 'home' %}"><img {% load static %}src="{% static "images/back-button.png" %}" alt=""></a>
 		</div>
 	</div>
 </div>
