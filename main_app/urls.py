@@ -14,6 +14,6 @@ urlpatterns = [
     path('index/', views.index, name='index'),
     path('user/<int:user_id>/unassoc_timeslot/<int:timeslot_id>/', views.unassoc_timeslot, name='unassoc_timeslot'),
     path('user/<int:user_id>/add_photo/',views.add_photo, name='add_photo'),
-
+    path('user/<int:user_id>/delete_photo/',views.photo_delete, name='delete_photo'),
     path('user/<int:user_id>/timeslot/', views.timeslot_index, name='timeslot_index'),
 ]
