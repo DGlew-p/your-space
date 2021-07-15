@@ -84,7 +84,7 @@ def index(request):
         'profile': profile
     })
 
-@login_required
+
 def home(request):
     timeslot = Timeslot.objects.all()
     print(timeslot)

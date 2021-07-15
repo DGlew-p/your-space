@@ -13,12 +13,13 @@ from django.contrib.auth.models import User
 class Timeslot(models.Model):
     date = models.DateField()
     slot = models.CharField(max_length=50)
-
+    class Meta:
+        ordering = ['date']
+        
     def __str__(self):
         return self.slot
 
-    # def get_absolute_url(self):
-    #     return reverse('timeslot_detail', kwargs={'pk': self.pk})
+
 
 
 class Profile(models.Model):
