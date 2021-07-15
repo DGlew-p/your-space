@@ -22,7 +22,7 @@
 .flex-back-button{
 	display: flex;
 	justify-content: end;
-	margin-top: 1rem;
+	margin-top: 4rem;
 }
 
 .home-grid-signup {
@@ -206,6 +206,24 @@
 
 	.button.create {
 		font-size: 2.2vw;
+	}
+
+	.item-d-logo, .item-d{
+		left: 25%;
+	}
+
+	.text-signup {
+		margin-bottom: 3rem;
+		margin-top: 3rem;
+	}
+
+	.item-a-signup{
+		margin-top: 5rem;
+		margin-bottom: 5rem;
+	}
+
+	.flex-back-button {
+		margin-top: 4rem;
 	}
 }
 
