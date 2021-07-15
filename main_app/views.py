@@ -25,6 +25,7 @@ def unassoc_timeslot(request, user_id, timeslot_id):
   return redirect(f'/user/{user_id}/timeslot')
 
 
+
 def profile_update(request, user_id):
     user = User.objects.get(id=user_id)
     profile = Profile.objects.get(user_id=user_id)
@@ -50,6 +51,24 @@ def userpage(request, user_id):
     available_timeslots = Timeslot.objects.filter(profile=None)
 
     return render(request, "profile/user.html", {"user":request.user, "user_form":user_form, "profile_form":profile_form, 'timeslot':available_timeslots, 'profile':profile })
+
+
+def index(request):
+
+    userList = User.objects.values()
+    # displays all usernames including for user currently signed in
+    timeslot = Timeslot.objects.all()
+    profile = Profile.objects.get(user_id=request.user.id)
+    profile_timeslot = profile.timeslots.all()
+
+
+    return render(request, 'index.html', {
+      'userList': userList,
+      'timeslot': timeslot,
+      'profile_timeslot': profile_timeslot,
+      'profile':profile 
+      })
+
 
 def home(request):
     timeslot = Timeslot.objects.all()
@@ -104,22 +123,7 @@ def signup(request):
 
 
 
-def index(request):
 
-
-    userList = User.objects.values()
-    # displays all usernames including for user currently signed in
-    timeslot = Timeslot.objects.values()
-    # profile = Profile.objects.get(user_id=5)
-
-    print(userList)
-    print(request.user.id)
-    # print(profile)
-    return render(request, 'index.html', {
-      'userList': userList,
-      'timeslot': timeslot,
-    #   'profile': profile
-      })
     
 
     
