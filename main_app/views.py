@@ -158,14 +158,14 @@ class ProfileCreate(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class ProfileUpdate(LoginRequiredMixin, UpdateView):
-    model = Profile
-    fields = ['name', 'bio', 'role']
+# class ProfileUpdate(LoginRequiredMixin, UpdateView):
+#     model = Profile
+#     fields = ['name', 'bio', 'role']
 
 
-class ProfileDelete(LoginRequiredMixin, DeleteView):
-    model = Profile
-    success_url = '/'
+# class ProfileDelete(LoginRequiredMixin, DeleteView):
+#     model = Profile
+#     success_url = '/'
 
 
 @login_required

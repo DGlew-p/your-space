@@ -9,7 +9,7 @@
                 <a href="{% url 'index'%}" class="link is-info">Dashboard</a>
             </p>
 			<p class="level-item has-text-centered">
-                <a href="{% url 'index'%}" class="link is-info">Profile</a>
+                <a href="{% url 'userpage' user.id %}" class="link is-info">Profile</a>
             </p>
             <p class="level-item has-text-centered">
                 <a href="{% url 'logout' %}" class="link is-info">Sign Out</a>
@@ -21,7 +21,7 @@
 			    <img {% load static %}src="{% static "images/bg.png" %}" alt="">
 		    </div> {% endcomment %}
             <div class="scheduled-slots">
-                <h1>Times you've booked</h1>
+                <h2>Times you've booked</h2>
                 {% if profile.timeslots.count %}
                     {% for timeslot in user.profile.timeslots.all %}
                     <header class="card-header">
@@ -43,11 +43,11 @@
                 </footer>
                 {% endfor %}
                 {%else%}
-                <p>No Scheduled Slots</p>
+                <h2 class="not-available">No Scheduled Slots</h2>
                 {% endif %}
             </div>
             <div class="avilabletime-slots">
-                <h3>Available Time slots</h3>
+                <h2>Available Time slots</h2>
                     {% if timeslot.count %}
                         {% for timeslot in timeslot.all %}
                         <header class="card-header">
@@ -69,7 +69,7 @@
                     </footer>
                 {% endfor %}
                 {% else %} 
-                <h3>No Timeslots Available</h3>
+                <h2 class="not-available">No Timeslots Available</h2>
                 {% endif %}
             </div>
         </div>

@@ -6,7 +6,7 @@
             <img {% load static %} src="{% static "images/yourspace.png" %}" style="height: 120px" alt="">
         </p>
         <p class="level-item has-text-centered">
-            <a class="link is-info">Dashboard</a>
+            <a href="{% url 'index'%}" class="link is-info">Dashboard</a>
         </p>
         <p class="level-item has-text-centered">
             <a href="{% url 'logout' %}" class="link is-info">Sign Out</a>
@@ -88,8 +88,8 @@
             <div class="field-body">
                 <div class="field">
                     <div class="control">
-                        <button class="button is-primary" type="submit">
-                            Updat Profile
+                        <button class="button is-light" type="submit">
+                            Save Profile
                         </button>
                     </div>
                 </div>
