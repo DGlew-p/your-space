@@ -49,36 +49,36 @@
 					<h2>Profile</h2>
 				</div>
 				{% if user.first_name == '' %}
-				<div class="item-1 flex-profile-grid">
-					<h3>Username: {{ user.username }}</h3>
-				</div>
-				<div class="item-2 flex-profile-grid">
-					<h3>Email: {{ user.email }}</3>
-				</div>
-				<a href="{% url 'profile_edit' user.id %}">Complete registration</a>
+				    <div class="item-1 flex-profile-grid">
+					    <h3>Username: {{ user.username }}</h3>
+				    </div>
+				    <div class="item-2 flex-profile-grid">
+					    <h3>Email: {{ user.email }}</3>
+				    </div>
+				    <a href="{% url 'profile_edit' user.id %}">Complete registration</a>
 				{% else %}
-				<div class="item-3 flex-profile-grid">
-					<h3>{{ user.first_name }} {{ user.last_name }}</h3>
-				</div>
-				{% if profile.bio != '' %}
-				<div class="item-4">
-					<h2>Something About Me</h2>
-					<h3> {{ profile.bio }} </h3>
-				</div>
-				{% endif %}
-				{% if profile.role != '' %}
-				<div class="item-5 flex-profile-grid">
-					<h3> {{ profile.role }} </h3>
-				</div>
-				{% endif %}
-				{% if profile.linkedin != '' %}
-				<div class="item-6">
-					<h3>Let's Connect on LinkedIn! <a href="{{ profile.linkedin }}" target="_blank">{{ profile.linkedin }}</a></h3>
-				</div>
-				{% endif %}
-				<div class="item-7">
-					<a class="button" href="{% url 'profile_edit' user.id %}">Edit Profile</a>
-				</div>
+				    <div class="item-3 flex-profile-grid">
+					    <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+				    </div>
+				    {% if profile.bio != '' %}
+				        <div class="item-4">
+					        <h2>Something About Me</h2>
+					        <h3> {{ profile.bio }} </h3>
+				        </div>
+				    {% endif %}
+				    {% if profile.role != '' %}
+				        <div class="item-5 flex-profile-grid">
+					        <h3> {{ profile.role }} </h3>
+				        </div>
+				    {% endif %}
+				    {% if profile.linkedin != '' %}
+				        <div class="item-6">
+					        <h3>Let's Connect on LinkedIn! <a href="{{ profile.linkedin }}" target="_blank">{{ profile.linkedin }}</a></h3>
+				        </div>
+				    {% endif %}
+				    <div class="item-7">
+					    <a class="button" href="{% url 'profile_edit' user.id %}">Edit Profile</a>
+				    </div>
 				{% endif %}
 			</div>
 		</div>
