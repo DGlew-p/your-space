@@ -329,6 +329,13 @@
 	color: red;
 }
 
+.level-item.has-text-centered.add-photo-buttons {
+    flex-direction: column;
+}
+
+.uploadPhoto {
+    margin-bottom: 1rem;
+}
 
 @media (min-width: 768px) and (max-width: 991.98px) { 
 
