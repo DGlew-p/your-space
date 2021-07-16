@@ -1,13 +1,12 @@
-from django.http.response import HttpResponse
+
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.forms import UserCreationForm
 from .models import Timeslot, Profile, Photo
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.views.generic import ListView, DetailView
+from django.views.generic import DetailView
 from .forms import NewUserForm, UserForm, ProfileForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -31,6 +30,7 @@ def unassoc_timeslot(request, user_id, timeslot_id):
   Profile.objects.get(id=user_id).timeslots.remove(timeslot_id)
   return redirect(f'/user/{user_id}/timeslot')
 
+@login_required
 def unassoc_timeslot(request, user_id, timeslot_id):
     Profile.objects.get(id=user_id).timeslots.remove(timeslot_id)
     return redirect(f'/user/{user_id}/timeslot')
@@ -139,24 +139,19 @@ def add_photo(request, user_id):
       print('An error occurred uploading file to S3')
   return redirect('userpage', user_id=user_id)
 
-
+@login_required
 def photo_delete(request,user_id):
     photo = Photo.objects.get(user_id=user_id)
     photo.delete()
     return redirect('userpage', user_id=user_id)
 
-class ProfileCreate(LoginRequiredMixin, CreateView):
-    model = Profile
-    fields = ['name', 'bio', 'role']
+# class ProfileCreate(LoginRequiredMixin, CreateView):
+#     model = Profile
+#     fields = ['name', 'bio', 'role']
 
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
-
-
-class ProfileUpdate(LoginRequiredMixin, UpdateView):
-    model = Profile
-    fields = ['name', 'bio', 'role']
+#     def form_valid(self, form):
+#         form.instance.user = self.request.user
+#         return super().form_valid(form)
 
 
 class ProfileDelete(LoginRequiredMixin, DeleteView):
@@ -168,8 +163,8 @@ def profile_detail(request, profile_id):
     profile = Profile.objects.get(id=profile_id)
     return render(request, 'profile/detail.html', {'profile': profile})
 
-class TimeslotDetail(LoginRequiredMixin, DetailView):
-    model = Timeslot
+# class TimeslotDetail(LoginRequiredMixin, DetailView):
+#     model = Timeslot
 
 
 @login_required
