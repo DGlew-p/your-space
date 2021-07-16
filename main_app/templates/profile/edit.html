@@ -19,7 +19,7 @@
             <div class="field-body">
                 <div class="field">
                     <p class="control is-expanded has-icons-left">
-                        <input class="input is-success" type="text" placeholder="Username" value="{{profile.user.username}}" name="username">
+                        <input class="input is-success" type="text" placeholder="Username" value="{{profile.user.username}}" name="username" required>
                         <span class="icon is-small is-left">
                             <i class="fas fa-user"></i>
                         </span>
@@ -27,7 +27,7 @@
                 </div>
                 <div class="field">
                     <p class="control is-expanded has-icons-left has-icons-right">
-                        <input class="input is-success" type="email" placeholder="Email" value="{{profile.user.email}}" name="email">
+                        <input class="input is-success" type="email" placeholder="Email" value="{{profile.user.email}}" name="email" required>
                         <span class="icon is-small is-left">
                             <i class="fas fa-envelope"></i>
                         </span>
@@ -39,7 +39,7 @@
             <div class="field-body">
                 <div class="field">
                     <p class="control is-expanded has-icons-left">
-                        <input class="input" type="text" placeholder="First Name" value="{{ profile.user.first_name }}" name="first_name">
+                        <input class="input" type="text" placeholder="First Name" value="{{ profile.user.first_name }}" name="first_name" required>
                         <span class="icon is-small is-left">
                             <i class="fas fa-user"></i>
                         </span>
@@ -47,7 +47,7 @@
                 </div>
                 <div class="field">
                     <p class="control is-expanded has-icons-left has-icons-right">
-                        <input class="input" type="text" placeholder="Last Name" value="{{ profile.user.last_name }}" name="last_name">
+                        <input class="input" type="text" placeholder="Last Name" value="{{ profile.user.last_name }}" name="last_name" required>
                         <span class="icon is-small is-left">
                             <i class="fas fa-user"></i>
                         </span>
