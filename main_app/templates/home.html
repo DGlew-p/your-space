@@ -2,11 +2,10 @@
 
 <div class="home-frame">
 	<div class="home-grid">
-		<div class="item-a box-relative flex-home-buttons">
-			<h1 class="item-d">/your-space/</h1>
-			<img class="item-g" {% load static %}src="{% static "images/bg.png" %}" alt="">
+		<div class="item-a flex-home-buttons-one">
+			<img class="item-g" {% load static %}src="{% static "images/yourspace.png" %}" alt="">
 		</div>
-		<h2 class="item-c flex-home-buttons">Your Space, When You Want It</h2>	
+		<h2 class="item-c flex-home-buttons-one">Your Space, When You Want It</h2>	
 		<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
 			<div class="carousel-inner">
 				<div class="carousel-item active">
@@ -28,7 +27,7 @@
 				<span class="sr-only">Next</span>
 			</a>
 		</div>		
-		<div class="flex-home-buttons item-b">
+		<div class="flex-home-buttons-one item-b">
 			<a class="button create" href="{% url 'signup' %}">CREATE AN ACCOUNT</a>
 			<a class="button login" href="{% url 'login' %}">LOGIN</a>
 		</div>

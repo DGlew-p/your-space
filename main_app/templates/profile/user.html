@@ -1,76 +1,88 @@
 {% extends 'base.html' %} {% block content %}
-    
-	<div>
-	{% for photo in profile.photo_set.all %}
-		<div>
-		<figure class="image is-128x128">
-			<img class="is-rounded" src="{{photo.url}}">
-		  </figure>
-		</div><br>
-		<div>
-		  <form action="{% url 'delete_photo' user.id %}" method="POST">
-			{% csrf_token %}
-			<input type="submit" class="button" value="Delete Photo">
-		  </form>
+	<div class="home-frame">
+		<nav class="level">
+			<p class="level-item has-text-centered">
+				<img {% load static %} src="{% static "images/yourspace.png" %}" style="height: 120px" alt="">
+			</p>
+			<p class="level-item has-text-centered">
+				<a href="{% url 'index'%}" class="link is-info">Dashboard</a>
+			</p>
+			<p class="level-item has-text-centered">
+				<a href="{% url 'logout' %}" class="link is-info">Sign Out</a>
+			</p>
+		</nav>
+		
+	<div class="container is-fluid">
+  		<div class="notification is-light">
+    		<nav class="level">
+				<div class="level-item has-text-centered">
+				{% for photo in profile.photo_set.all %}
+					<div class="image-cropper">
+						<img class="profile-pic" src="{{photo.url}}">
+					</div>
+					<div>
+						<form action="{% url 'delete_photo' user.id %}" method="POST">
+							{% csrf_token %}
+							<button type="submit" class="delete is-large" value="Delete Photo">
+						</form>
+					</div>
+					{% empty %}
+					<div class="uploadPhoto">
+						<h2>Hi {{ user.username|title }}, Please Upload A Profile Photo</h2>
+					</div>
+					<div>
+						<form action="{% url 'add_photo' profile.id %}" enctype="multipart/form-data" method="POST">
+							{% csrf_token %}
+							<input type="file" name="photo-file">
+							<button type="submit" class="button" value="Upload Photo">Upload Photo</button>
+						</form>
+					</div>
+				{% endfor %}
+				</div>
+			</nav>
+  		</div>
+	</div>
+	<div class="container is-fluid profile-cont">
+  		<div class="notification is-danger">
+			<div class="profile-grid">
+				<div class="item-8 flex-profile-grid">	
+					<h2>Profile</h2>
+				</div>
+				{% if user.first_name == '' %}
+				<div class="item-1 flex-profile-grid">
+					<h3>Username: {{ user.username }}</h3>
+				</div>
+				<div class="item-2 flex-profile-grid">
+					<h3>Email: {{ user.email }}</3>
+				</div>
+				<a href="{% url 'profile_edit' user.id %}">Complete registration</a>
+				{% else %}
+				<div class="item-3 flex-profile-grid">
+					<h3>{{ user.first_name }} {{ user.last_name }}</h3>
+				</div>
+				{% if profile.bio != '' %}
+				<div class="item-4">
+					<h2>Something About Me</h2>
+					<h3> {{ profile.bio }} </h3>
+				</div>
+				{% endif %}
+				{% if profile.role != '' %}
+				<div class="item-5 flex-profile-grid">
+					<h3> {{ profile.role }} </h3>
+				</div>
+				{% endif %}
+				{% if profile.linkedin != '' %}
+				<div class="item-6">
+					<h3>Let's Connect on LinkedIn! <a href="{{ profile.linkedin }}" target="_blank">{{ profile.linkedin }}</a></h3>
+				</div>
+				{% endif %}
+				<div class="item-7">
+					<a class="button" href="{% url 'profile_edit' user.id %}">Edit Profile</a>
+				</div>
+				{% endif %}
+			</div>
 		</div>
-		{% empty %}
-		<div>No Photos Uploaded</div>
-		<div>
-			<form class="button" action="{% url 'add_photo' profile.id %}" enctype="multipart/form-data" method="POST">
-			  {% csrf_token %}
-			  <input type="file" name="photo-file">
-			  <br>
-			  <input type="submit" class="button is-small is-link is-outlined" value="Upload Photo">
-			</form>
-		</div>
-		{% endfor %}
-	  	</div>
-	
-	
-	
-	
-	<div class="container mx-auto">
-	    <div class="row">
-	    	<div class="col-sm-12 col-md-12 col-lg-3 pb-4">
-		    	<div class="card p-4">
-			    	<h4 class="card-title font-weight-bold text-center">Hello, {{ user.username|title }}</h4>
-			      	<hr>
-			    	<div class="card-text">
-						{% if user.first_name == '' %}
-			    		    <p class="text-muted mb-0" style="font-size: 12px">Username: {{ user.username }}</p>
-			    		    <p class="text-muted mb-0" style="font-size: 12px">Email: {{ user.email }} </p><br>
-						    <a href="{% url 'profile_edit' user.id %}">Complete registration</a>
-						
-						{% else %}
+	</div>
 
-						    <p class="text-muted mb-0" style="font-size: 12px">Username: {{ user.username }}</p>
-			    		    <p class="text-muted mb-0" style="font-size: 12px">Name: {{ user.first_name }} {{ user.last_name }}</p>
-				  		    <p class="text-muted mb-0" style="font-size: 12px">Email: {{ user.email }} </p>
-							{% if profile.bio != '' %}
-							    <p class="text-muted mb-0" style="font-size: 12px">Bio: {{ profile.bio }} </p>
-							{% endif %}
-						    {% if profile.role != '' %}
-							    <p>Role: {{ profile.role }} </p>
-							{% endif %}
-							{% if profile.linkedin != '' %}
-							    <p>Linkedin : <a href="{{ profile.linkedin }}" target="_blank">{{ profile.linkedin }}</a></p>
-							{% endif %}
-
-						
-						    <a class="button" href="{% url 'profile_edit' user.id %}">Edit Profile</a>
-						{% endif %}
-                          <!-- <div class="text-right">
-							<a href="{% url 'profile_edit' user.id %}">Edit Profile</a>
-						</div> -->
-			        </div>
-                    <hr>
-		    	</div>
-
-		  	</div>
-		    
-    <hr>
-	<p><a class="button" href="{% url 'index'%}"><span>Back to the Dashboard</span></a></p>
-</body>
-</html>
-
-{% endblock %} 
+{% endblock %}	
+ 

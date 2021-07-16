@@ -1,30 +1,110 @@
-{% load static %}
+{% extends 'base.html' %}{% block content %}
 
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-</head>
-<body>
+<div class="home-frame">
+    <nav class="level">
+        <p class="level-item has-text-centered">
+            <img {% load static %} src="{% static "images/yourspace.png" %}" style="height: 120px" alt="">
+        </p>
+        <p class="level-item has-text-centered">
+            <a href="{% url 'index'%}" class="link is-info">Dashboard</a>
+        </p>
+        <p class="level-item has-text-centered">
+            <a href="{% url 'logout' %}" class="link is-info">Sign Out</a>
+        </p>
+    </nav>
     <form action="{% url 'profile_update' user.id %}" method="POST">
         {% csrf_token %} 
         {% load widget_tweaks %}
-        
-        <span class="icon is-small is-left"><i class="fas fa-user"></i>Username<span class="required">*</span>: <input value="{{profile.user.username}}" name="username" required></span>
+        <div class="field is-horizontal">
+            <div class="field-body">
+                <div class="field">
+                    <p class="control is-expanded has-icons-left">
+                        <input class="input is-success" type="text" placeholder="Username" value="{{profile.user.username}}" name="username">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-user"></i>
+                        </span>
+                    </p>
+                </div>
+                <div class="field">
+                    <p class="control is-expanded has-icons-left has-icons-right">
+                        <input class="input is-success" type="email" placeholder="Email" value="{{profile.user.email}}" name="email">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="field is-horizontal">
+            <div class="field-body">
+                <div class="field">
+                    <p class="control is-expanded has-icons-left">
+                        <input class="input" type="text" placeholder="First Name" value="{{ profile.user.first_name }}" name="first_name">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-user"></i>
+                        </span>
+                    </p>
+                </div>
+                <div class="field">
+                    <p class="control is-expanded has-icons-left has-icons-right">
+                        <input class="input" type="text" placeholder="Last Name" value="{{ profile.user.last_name }}" name="last_name">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-user"></i>
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="field is-horizontal">
+            <div class="field-body">
+                <div class="field">
+                    <p class="control is-expanded has-icons-left">
+                        <input class="input" type="text" placeholder="Role" value="{{profile.role}}" name="role">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-user"></i>
+                        </span>
+                    </p>
+                </div>
+                <div class="field">
+                    <p class="control is-expanded has-icons-left has-icons-right">
+                        <input class="input" type="text" placeholder="LinkedIn" value="{{profile.linkedin}}" name="linkedin">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-user"></i>
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="field is-horizontal">
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                        <textarea class="textarea" placeholder="Bio" value="{{profile.role}}" name="bio" ></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="field is-horizontal">
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                        <button class="button is-light" type="submit">
+                            Save Profile
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% comment %} <span class="icon is-small is-left"><i class="fas fa-user"></i>Username<span class="required">*</span>: <input value="{{profile.user.username}}" name="username" required></span>
         First Name<span class="required">*</span>: <input value="{{ profile.user.first_name }}" name="first_name" placeholder="e.g John" required>
         Last Name<span class="required">*</span>: <input value="{{ profile.user.last_name }}" name="last_name" placeholder="e.g Smith" required>
         Email<span class="required">*</span>: <input value="{{profile.user.email}}" name="email" placeholder="e.g example@gmail.com" required>
         Role: <input value="{{profile.role}}" name="role">
         Bio: <input value="{{profile.bio}}" name="bio">
         LinkedIn: <input value="{{profile.linkedin}}" name="linkedin" placeholder="https://www.linkedin.com/in/johnsmith/">
-        <button type="submit">Save</button>
+        <button type="submit">Save</button> {% endcomment %}
     </form>
+</div>
 
-    
-</body>
-</html>
+{% endblock %}

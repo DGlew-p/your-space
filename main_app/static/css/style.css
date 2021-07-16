@@ -13,6 +13,13 @@
 	align-items: center;
 }
 
+.flex-home-buttons-one{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
 .flex-dashboard-buttons {
 	display: flex;
 	justify-content: center;
@@ -153,7 +160,7 @@
 .item-d {
 	position: absolute;
 	top: 40%;
-	left: 13%;
+	left: 25%;
 	font-size: 3rem;
 	margin-bottom: 1rem;
 	font-family: 'Lora', serif;
@@ -162,8 +169,8 @@
 .item-d-logo {
 	position: absolute;
 	top: 40%;
-	left: 35%;
-	font-size: 3rem;
+	left: 20%;
+	font-size: 2.3rem;
 	margin-bottom: 1rem;
 	font-family: 'Lora', serif;
 }
@@ -208,6 +215,12 @@
 
 .box-relative {
 	position: relative;
+	width: 33%;
+}
+
+.box-relative-one {
+	position: relative;
+	width: 85%;
 }
 
 .button.create {
@@ -225,6 +238,104 @@
 	font-family: 'Roboto', sans-serif;
 }
 
+.image-cropper {
+	width: 100px;
+	height: 100px;
+	position: relative;
+	overflow: hidden;
+	border-radius: 70%;
+}
+
+.profile-pic {
+	display: inline;
+	margin: 0 auto;
+	margin-left: 0%;
+    height: 139%;
+    width: auto;
+    margin-top: -15%;
+}
+
+.uploadPhoto {
+	margin-right: 2rem;
+}
+
+.container.is-fluid.profile-cont{
+	font-family: 'Lora', serif;
+}
+
+.profile-title {
+	font-size: 2rem;
+	margin-bottom: 2rem;
+	text-align: center;
+}
+
+.profile-subtitle.name {
+	text-align: center;
+	font-size: 2rem;
+}
+
+.profile-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr 1fr 1fr 1fr;
+}
+
+.flex-profile-grid{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.item-8 {
+	grid-row-start: 1;
+	grid-row-end: 2;
+	font-size: 2rem;
+}
+
+.item-7 {
+	margin-top: 3rem;
+}
+.item-3 {
+	grid-column-start: 1;
+	grid-row-start: 2;
+	grid-row-end: 3;
+	font-size: 1.3rem
+}
+.item-5 {
+	grid-row-start: 3;
+	grid-row-end: 4;
+	font-size: 1.2rem;
+}
+
+
+.delete.is-large {
+    margin-top: 4rem;
+
+}
+
+.button.profile {
+	margin-top: 2rem;
+}
+
+.avilabletime-slots {
+    margin-top: 3rem;
+}
+
+.avilabletime-slots h2, .scheduled-slots h2 {
+	font-size: 1.5rem;
+	padding:1rem
+}
+
+.not-available {
+	color: red;
+}
+
+
+@media (min-width: 768px) and (max-width: 991.98px) { 
+
+	.box-relative-one{
+		width: 50%;
+	}
+ }
 
 @media (max-width: 575.98px) {
 	.home-grid {
