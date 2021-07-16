@@ -5,8 +5,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from .models import Timeslot, Profile, Photo
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.views.generic import DetailView
+from django.views.generic.edit import DeleteView
+# from django.views.generic import DetailView // future dev
 from .forms import NewUserForm, UserForm, ProfileForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -30,10 +30,6 @@ def unassoc_timeslot(request, user_id, timeslot_id):
   Profile.objects.get(id=user_id).timeslots.remove(timeslot_id)
   return redirect(f'/user/{user_id}/timeslot')
 
-@login_required
-def unassoc_timeslot(request, user_id, timeslot_id):
-    Profile.objects.get(id=user_id).timeslots.remove(timeslot_id)
-    return redirect(f'/user/{user_id}/timeslot')
 
 @login_required
 def profile_update(request, user_id):
@@ -145,14 +141,6 @@ def photo_delete(request,user_id):
     photo.delete()
     return redirect('userpage', user_id=user_id)
 
-# class ProfileCreate(LoginRequiredMixin, CreateView):
-#     model = Profile
-#     fields = ['name', 'bio', 'role']
-
-#     def form_valid(self, form):
-#         form.instance.user = self.request.user
-#         return super().form_valid(form)
-
 
 class ProfileDelete(LoginRequiredMixin, DeleteView):
     model = Profile
@@ -163,8 +151,11 @@ def profile_detail(request, profile_id):
     profile = Profile.objects.get(id=profile_id)
     return render(request, 'profile/detail.html', {'profile': profile})
 
+
+# future dev
 # class TimeslotDetail(LoginRequiredMixin, DetailView):
 #     model = Timeslot
+
 
 
 @login_required
