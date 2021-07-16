@@ -1,7 +1,7 @@
 # /your-space/
 
 ## Introduction:
-What does the future of workspaces look like in a post-pandemic world? As workspaces start to open up, it can be a struggle to find an ideal workspace for freelancers. They need to find a remote-friendly to schedule time in the office. Here's a scenario to consider:
+What does the future of workspaces look like in a post-pandemic world? As workspaces start to open up, it can be a struggle to find an ideal workspace for freelancers. They need to find a remote-friendly solution to schedule time in the office. Here's a scenario to consider:
 
 <img src="readme_imgs/scenario.png">
 
@@ -33,6 +33,8 @@ You can find the ERD [here.](https://lucid.app/lucidchart/invitations/accept/inv
 You can find the Trello board [here.](https://trello.com/b/QsBWQ459/seat-tacker)
 
 ## Screenshots:
+<img src="readme_imgs/screenshot1.png">
+<img src="readme_imgs/screenshot2.png">
 
 ## Technologies Used:
 - HTML
