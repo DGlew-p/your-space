@@ -61,7 +61,7 @@ def userpage(request, user_id):
     user_form = UserForm(instance=request.user)
     profile_form = ProfileForm(instance=request.user.profile)
     profile = Profile.objects.get(user_id=user_id)
-    available_timeslots = Timeslot.objects.filter(profile=None)
+    available_timeslots = Timeslot.objects.filter(profile=None).order_by('id')
 
     return render(request, "profile/user.html", {"user": request.user, "user_form": user_form, "profile_form": profile_form, 'timeslot': available_timeslots, 'profile': profile})
 
@@ -163,7 +163,7 @@ def timeslot_index(request, user_id):
     user_form = UserForm(instance=request.user)
     profile_form = ProfileForm(instance=request.user.profile)
     profile = Profile.objects.get(user_id=user_id)
-    available_timeslots = Timeslot.objects.filter(profile=None)
+    available_timeslots = Timeslot.objects.filter(profile=None).order_by('id')
     return render(request, 'profile/timeslot_list.html', {
         "user": request.user,
         "user_form": user_form,
