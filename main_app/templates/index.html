@@ -2,15 +2,26 @@
 {% block content %}
 
     <div class="home-frame">
+          <nav class="level">
+            <p class="level-item has-text-centered">
+                <img {% load static %} src="{% static "images/yourspace.png" %}" style="height: 120px" alt="">
+            </p>
+            <p class="level-item has-text-centered">
+                <a class="link is-info"></a>
+            </p>
+            <p class="level-item has-text-centered">
+                <a href="{% url 'logout' %}" class="link is-info">Sign Out</a>
+            </p>
+        </nav>
         <div class="dashboard-grid">
-            <div class="box-relative flex-home-buttons">
+            {% comment %} <div class="box-relative flex-home-buttons">
 			    <h1 class="item-d-logo">/your-space/</h1>
 			    <img {% load static %}src="{% static "images/bg.png" %}" alt="">
-		    </div>
+		    </div> {% endcomment %}
             <div class="row1">
                 <h1 class="welcome-dash">Welcome to /your-space/ <span>{{ request.user }}</span>!</h2>
                 <div class="flex-dashboard-buttons">
-                    <p><a class="button" href="/user/{{user.id}}/timeslot/"><span class="bookSlots">Edit Your Spaces</span></a></p>
+                    <p><a class="button" href="/user/{{user.id}}/timeslot/"><span class="bookSlots">Edit Your Bookings</span></a></p>
                     <p><a class="button"href="{% url 'userpage' user.id %}">View your profile</a></p>
                 </div>
             </div>
@@ -32,13 +43,6 @@
                       <p class="card-header-title">Time Slot of Booking: {{ timeslot.slot }}</p>
                     </div>
                 </div>
-                <footer class="card-footer">
-                    {% comment %} <form action="{% url 'unassoc_timeslot' user.id timeslot.id %}" method="post">
-                        {% csrf_token %}
-                        <button type="submit" class="btn">Remove</button>
-                    </form>
-                    <p><a href="/user/{{user.id}}/timeslot/"><span class="bookSlots">Book more timeslots </span></a></p>{% endcomment %}
-                </footer> 
                 {% endfor %}
                 {%else%}
                     <p>You currently have no scheduled bookings</p>
