@@ -1,40 +1,77 @@
 {% extends 'base.html' %}
 {% block content %}
-
-<h1>Times you've booked</h1>
-
-<h2 class="font-weight-bold pt-4">Scheduled Slots</h2>
-{% if profile.timeslots.count %}
-    {% for timeslot in user.profile.timeslots.all %}
-            <li> {{ timeslot.date }} | {{ timeslot.slot }} </li>
-			<form action="{% url 'unassoc_timeslot' user.id timeslot.id %}" method="post">
-	{% csrf_token %}
-			 <button type="submit" class="btn">Remove</button>
-			</form>
-    {% endfor %}
-{%else%}
-		    <li>No scheduled slots</li>
-{% endif%}
-                                          
-
-
-    
-		    	
-<h3>Available Time slots</h3>
-{% if timeslot.count %}
-    {% for timeslot in timeslot.all %}
-			<span>{{ timeslot.date}}</span> {{ timeslot.slot}}</span>
-						
-            <div class="card-action">
-	        <form action="{% url 'assoc_timeslot' user.id timeslot.id %}" method="post">
-	{% csrf_token %}
-			<button type="submit" class="btn">Add</button>
-        	</form>
-	{% endfor %}
-{% else %}
-            <h5>No Timeslots  Available</h5>
-{% endif %}
-            </div>						
-             
-            <p><a class="" href="{% url 'index'%}"><span>Back to the Dashboard</span></a></p>
+    <div class="home-frame">
+		<nav class="level">
+        	<p class="level-item has-text-centered">
+                <img {% load static %} src="{% static "images/yourspace.png" %}" style="height: 120px" alt="">
+            </p>
+            <p class="level-item has-text-centered">
+                <a href="{% url 'index'%}" class="link is-info">Dashboard</a>
+            </p>
+			<p class="level-item has-text-centered">
+                <a href="{% url 'userpage' user.id %}" class="link is-info">Profile</a>
+            </p>
+            <p class="level-item has-text-centered">
+                <a href="{% url 'logout' %}" class="link is-info">Sign Out</a>
+            </p>
+        </nav>
+        <div class="dashboard-grid">
+            {% comment %} <div class="box-relative flex-home-buttons">
+			    <h1 class="item-d-logo">/your-space/</h1>
+			    <img {% load static %}src="{% static "images/bg.png" %}" alt="">
+		    </div> {% endcomment %}
+            <div class="scheduled-slots">
+                <h2>Times you've booked</h2>
+                {% if profile.timeslots.count %}
+                    {% for timeslot in user.profile.timeslots.all %}
+                    <header class="card-header">
+                        <p class="card-header-title">Date of Booking: {{ timeslot.date }}</p>
+                        <button class="card-header-icon" aria-label="more options">
+                            <span class="icon"><i class="fas fa-angle-down" aria-hidden="true"></i></span>
+                        </button>                   
+                    </header>                   
+                    <div class="card-content slot">
+                        <div class="content">
+                            <p class="card-header-title">Time Slot of Booking: {{ timeslot.slot }}</p>
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                    <form action="{% url 'unassoc_timeslot' user.id timeslot.id %}" method="post">
+                        {% csrf_token %}
+                        <button class="button" type="submit" class="btn">Remove Booking</button>
+                    </form>
+                </footer>
+                {% endfor %}
+                {%else%}
+                <h2 class="not-available">No Scheduled Slots</h2>
+                {% endif %}
+            </div>
+            <div class="avilabletime-slots">
+                <h2>Available Time slots</h2>
+                    {% if timeslot.count %}
+                        {% for timeslot in timeslot.all %}
+                        <header class="card-header">
+                            <p class="card-header-title">Date of Booking: {{ timeslot.date }}</p>
+                            <button class="card-header-icon" aria-label="more options">
+                                <span class="icon"><i class="fas fa-angle-down" aria-hidden="true"></i></span>
+                            </button>                   
+                        </header>                   
+                        <div class="card-content slot">
+                            <div class="content">
+                                <p class="card-header-title">Time Slot of Booking: {{ timeslot.slot }}</p>
+                            </div>
+                        </div>
+                    <footer class="card-footer">
+                        <form action="{% url 'assoc_timeslot' user.id timeslot.id %}" method="post">
+                            {% csrf_token %}
+                            <button class="button" type="submit">Add Booking</button>
+                        </form>
+                    </footer>
+                {% endfor %}
+                {% else %} 
+                <h2 class="not-available">No Timeslots Available</h2>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 {% endblock %}

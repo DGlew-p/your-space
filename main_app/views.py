@@ -18,7 +18,6 @@ S3_BASE_URL = 'https://s3.us-east-2.amazonaws.com/'
 BUCKET = 'silverwareseatselector'
 
 
-
 @login_required
 def assoc_timeslot(request, user_id, timeslot_id):
     Profile.objects.get(user_id=user_id).timeslots.add(timeslot_id)
@@ -27,8 +26,10 @@ def assoc_timeslot(request, user_id, timeslot_id):
 
 @login_required
 def unassoc_timeslot(request, user_id, timeslot_id):
-  Profile.objects.get(id=user_id).timeslots.remove(timeslot_id)
-  return redirect(f'/user/{user_id}/timeslot')
+    Profile.objects.get(id=user_id).timeslots.remove(timeslot_id)
+    return redirect(f'/user/{user_id}/timeslot')
+
+
 
 
 @login_required
@@ -43,12 +44,13 @@ def profile_update(request, user_id):
     profile.role = request.POST['role']
     profile.bio = request.POST['bio']
     profile.linkedin = request.POST['linkedin']
-    
+
     user.save()
     profile.save()
     print(profile.role)
     print(user.first_name)
     return redirect(f'/user/{user.id}')
+
 
 @login_required
 def profile_edit(request, user_id):
@@ -64,6 +66,7 @@ def userpage(request, user_id):
     available_timeslots = Timeslot.objects.filter(profile=None).order_by('id')
 
     return render(request, "profile/user.html", {"user": request.user, "user_form": user_form, "profile_form": profile_form, 'timeslot': available_timeslots, 'profile': profile})
+
 
 @login_required
 def index(request):
@@ -88,7 +91,6 @@ def home(request):
     return render(request, 'home.html', {'timeslot': timeslot})
 
 
-
 def login_request(request):
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
@@ -98,7 +100,8 @@ def login_request(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                messages.success(request, f"You are now logged in as {username}.")
+                messages.success(
+                    request, f"You are now logged in as {username}.")
                 return redirect("index")
             else:
                 messages.error(request, "Invalid username or password.")
@@ -119,7 +122,7 @@ def signup(request):
 
     return render(request=request, template_name="register.html", context={"form": form})
 
-    
+
 @login_required
 def add_photo(request, user_id):
   photo_file = request.FILES.get('photo-file', None)
@@ -142,9 +145,10 @@ def photo_delete(request,user_id):
     return redirect('userpage', user_id=user_id)
 
 
-class ProfileDelete(LoginRequiredMixin, DeleteView):
-    model = Profile
-    success_url = '/'
+# class ProfileDelete(LoginRequiredMixin, DeleteView):
+#     model = Profile
+#     success_url = '/'
+
 
 @login_required
 def profile_detail(request, profile_id):
