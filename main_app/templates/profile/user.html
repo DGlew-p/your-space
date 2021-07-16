@@ -11,50 +11,7 @@
 				<a href="{% url 'logout' %}" class="link is-info">Sign Out</a>
 			</p>
 		</nav>
-		{% comment %} <div class="tile is-ancestor">
-  			<div class="tile is-vertical is-8">
-    			<div class="tile">
-    				<div class="tile is-parent">		
-        				<article class="tile is-child notification is-info">
-         					<p class="title">Middle tile</p>
-          					<p class="subtitle">With an image</p>
-          					<figure class="image is-4by3">
-            					<img src="https://bulma.io/images/placeholders/640x480.png">
-          					</figure>
-        				</article>
-     				</div>
-					<div class="tile is-parent">
-      					<article class="tile is-child notification is-danger"> {% endcomment %}
-        					{% comment %} <p class="title">Wide tile</p>
-        					<p class="subtitle">Aligned with the right tile</p> {% endcomment %}
-        					{% comment %} <div class="content">
-          						{% for photo in profile.photo_set.all %}
-								<div class="image-cropper">
-									<img class="profile-pic" src="{{photo.url}}">
-								</div>
-								<div>
-									<form action="{% url 'delete_photo' user.id %}" method="POST">
-										{% csrf_token %}
-										<button type="submit" class="delete is-large" value="Delete Photo">
-									</form>
-								</div>
-								{% empty %}
-								<div>Upload A Profile Photo</div>
-								<div>
-									<form action="{% url 'add_photo' profile.id %}" enctype="multipart/form-data" method="POST">
-										{% csrf_token %}
-										<input type="file" name="photo-file">
-										<button type="submit" class="button" value="Upload Photo">Upload Photo</button>
-									</form>
-								</div>
-								{% endfor %}
-							</div>
-      					</article>
-    				</div>
-  				</div>
-			</div>
-		<div>
-	</div> {% endcomment %}
+		
 	<div class="container is-fluid">
   		<div class="notification is-light">
     		<nav class="level">
@@ -128,48 +85,4 @@
 	</div>
 
 {% endblock %}	
-		
-		
-		{% comment %} <div class="container mx-auto">
-			<div class="row">
-				<div class="col-sm-12 col-md-12 col-lg-3 pb-4">
-					<div class="card p-4">
-						<h4 class="card-title font-weight-bold text-center">Hello, {{ user.username|title }}</h4>
-						<hr>
-						<div class="card-text">
-							{% if user.first_name == '' %}
-								<p class="text-muted mb-0" style="font-size: 12px">Username: {{ user.username }}</p>
-								<p class="text-muted mb-0" style="font-size: 12px">Email: {{ user.email }} </p><br>
-								<a href="{% url 'profile_edit' user.id %}">Complete registration</a>
-							
-							{% else %}
-
-								<p class="text-muted mb-0" style="font-size: 12px">Username: {{ user.username }}</p>
-								<p class="text-muted mb-0" style="font-size: 12px">Name: {{ user.first_name }} {{ user.last_name }}</p>
-								<p class="text-muted mb-0" style="font-size: 12px">Email: {{ user.email }} </p>
-								{% if profile.bio != '' %}
-									<p class="text-muted mb-0" style="font-size: 12px">Bio: {{ profile.bio }} </p>
-								{% endif %}
-								{% if profile.role != '' %}
-									<p>Role: {{ profile.role }} </p>
-								{% endif %}
-								{% if profile.linkedin != '' %}
-									<p>Linkedin : <a href="{{ profile.linkedin }}" target="_blank">{{ profile.linkedin }}</a></p>
-								{% endif %}
-
-							
-								<a href="{% url 'profile_edit' user.id %}">Edit Profile</a>
-							{% endif %}
-							<!-- <div class="text-right">
-								<a href="{% url 'profile_edit' user.id %}">Edit Profile</a>
-							</div> -->
-						</div>
-						<hr>
-					</div>
-
-				</div>
-				
-		<hr>
-	</div> {% endcomment %}
-
  
