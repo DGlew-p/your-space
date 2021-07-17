@@ -2,8 +2,8 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-import environ
-environ.Env.read_env()
+# import environ
+# environ.Env.read_env()
 
 
 

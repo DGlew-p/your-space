@@ -17,12 +17,11 @@ from django.contrib.messages import constants as messages
 import os
 import sys
 import environ
-import environ
-env = environ.Env(
-    # set casting, default value
-    DEBUG=(bool, False)
-)
-environ.Env.read_env()
+# env = environ.Env(
+#     # set casting, default value
+#     DEBUG=(bool, False)
+# )
+# environ.Env.read_env()
 
 MESSAGE_TAGS = {
     messages.DEBUG: 'alert-secondary',
