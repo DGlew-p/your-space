@@ -12,7 +12,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 import uuid
 import boto3
-
+import environ
+# env = environ.Env(
+#     DEBUG=(bool, False)
+# )
+# environ.Env.read_env()
 
 S3_BASE_URL = 'https://s3.us-east-2.amazonaws.com/'
 BUCKET = 'silverwareseatselector'
@@ -22,7 +26,7 @@ BUCKET = 'silverwareseatselector'
 def assoc_timeslot(request,timeslot_id , user_id):
     p = Profile.objects.filter(timeslots__id = timeslot_id).count()
     if p > 0:
-        messages.error(request,"timeslot is already booked")
+        messages.error(request,"We're sorry, that timeslot just got booked.")
         return redirect(f'/user/{user_id}/timeslot')
     else:
         Profile.objects.get(user_id=user_id).timeslots.add(timeslot_id)
@@ -41,7 +45,6 @@ def unassoc_timeslot(request, user_id, timeslot_id):
 def profile_update(request, user_id):
     user = User.objects.get(id=user_id)
     profile = Profile.objects.get(user_id=user_id)
-    print(user.username)
 
     user.first_name = request.POST['first_name']
     user.last_name = request.POST['last_name']
@@ -52,8 +55,6 @@ def profile_update(request, user_id):
 
     user.save()
     profile.save()
-    print(profile.role)
-    print(user.first_name)
     return redirect(f'/user/{user.id}')
 
 
@@ -92,7 +93,6 @@ def index(request):
 
 def home(request):
     timeslot = Timeslot.objects.all()
-    print(timeslot)
     return render(request, 'home.html', {'timeslot': timeslot})
 
 
@@ -140,7 +140,7 @@ def add_photo(request, user_id):
       photo = Photo(url=url, user_id=user_id)
       photo.save()
   except:
-      print('An error occurred uploading file to S3')
+      messages.error(request,'An error occurred uploading your')
   return redirect('userpage', user_id=user_id)
 
 @login_required
@@ -149,10 +149,6 @@ def photo_delete(request,user_id):
     photo.delete()
     return redirect('userpage', user_id=user_id)
 
-
-# class ProfileDelete(LoginRequiredMixin, DeleteView):
-#     model = Profile
-#     success_url = '/'
 
 
 @login_required
