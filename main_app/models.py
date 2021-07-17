@@ -1,11 +1,6 @@
 from django.db import models
-from django.forms import ModelForm
-from django.urls import reverse
 from django.dispatch import receiver
-#
 from django.db.models.signals import post_save
-#
-from datetime import date, datetime
 from django.contrib.auth.models import User
 # Create your models here.
 
@@ -13,14 +8,11 @@ from django.contrib.auth.models import User
 class Timeslot(models.Model):
     date = models.DateField()
     slot = models.CharField(max_length=50)
-
+    class Meta:
+        ordering = ['date']
+        
     def __str__(self):
         return self.slot
-
-    # def get_absolute_url(self):
-    #     return reverse('timeslot_detail', kwargs={'pk': self.pk})
-
-
 class Profile(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -43,8 +35,7 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
-    # def get_absolute_url(self):
-    #     return reverse('detail', kwargs={'profile_id': self.id})
+
 
 
 class Photo(models.Model):
