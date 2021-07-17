@@ -12,11 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 import uuid
 import boto3
-# import environ
-# env = environ.Env(
-#     DEBUG=(bool, False)
-# )
-# environ.Env.read_env()
+
 
 S3_BASE_URL = 'https://s3.us-east-2.amazonaws.com/'
 BUCKET = 'silverwareseatselector'
