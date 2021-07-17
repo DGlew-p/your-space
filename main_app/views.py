@@ -19,9 +19,14 @@ BUCKET = 'silverwareseatselector'
 
 
 @login_required
-def assoc_timeslot(request, user_id, timeslot_id):
-    Profile.objects.get(user_id=user_id).timeslots.add(timeslot_id)
-    return redirect(f'/user/{user_id}/timeslot')
+def assoc_timeslot(request,timeslot_id , user_id):
+    p = Profile.objects.filter(timeslots__id = timeslot_id).count()
+    if p > 0:
+        messages.error(request,"timeslot is already booked")
+        return redirect(f'/user/{user_id}/timeslot')
+    else:
+        Profile.objects.get(user_id=user_id).timeslots.add(timeslot_id)
+        return redirect(f'/user/{user_id}/timeslot')
 
 
 @login_required
